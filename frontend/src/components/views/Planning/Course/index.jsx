@@ -8,7 +8,10 @@ const StyledChip = styled(Chip)({
 const HSL_FACTOR = 5
 
 function Course({ depth = 1, type, pick = 1, value, displayType }) {
-  if (depth > 3) return null
+  if (depth > 3) {
+    console.log('max depth reached')
+    return null
+  }
   return (
     <Box
       p={1.5}
