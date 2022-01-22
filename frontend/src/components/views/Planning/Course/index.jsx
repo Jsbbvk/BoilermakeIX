@@ -3,12 +3,13 @@ import { Box, Typography, Chip, styled } from '@mui/material'
 const StyledChip = styled(Chip)({
   margin: 6,
   cursor: 'pointer',
+  maxWidth: 300,
 })
 
 const HSL_FACTOR = 5
 
 function Course({ depth = 1, type, pick = 1, value, displayType }) {
-  if (depth > 3) {
+  if (depth > 4) {
     console.log('max depth reached')
     return null
   }

@@ -12,6 +12,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useSelector, useDispatch } from 'react-redux'
 import Course from './Course'
 import UCORE from '../../../constants/ucore'
+import CourseModal from './CourseModal'
 
 const StyledAccordion = styled(Accordion)({
   backgroundColor: '#dba8574f',
@@ -50,7 +51,11 @@ function Planning() {
                   <Typography variant="h6">{curriculum.title}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Course {...curriculum} />
+                  {curriculum.size === 'large' ? (
+                    <CourseModal curriculum={curriculum} />
+                  ) : (
+                    <Course {...curriculum} />
+                  )}
                 </AccordionDetails>
               </Accordion>
             ))}
