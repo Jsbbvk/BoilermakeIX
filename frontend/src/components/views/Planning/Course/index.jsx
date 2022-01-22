@@ -1,4 +1,6 @@
 import { Box, Typography, Chip, styled } from '@mui/material'
+import { useDispatch } from 'react-redux'
+import { selectCourse, showCourseInfo } from '../../../../store'
 
 const StyledChip = styled(Chip)({
   margin: 6,
@@ -8,10 +10,18 @@ const StyledChip = styled(Chip)({
 const HSL_FACTOR = 5
 
 function Course({ depth = 1, type, pick = 1, value, displayType }) {
+  const dispatch = useDispatch()
+
   if (depth > 3) {
     console.log('max depth reached')
     return null
   }
+
+  const handleClick = (subject, number) => {
+    dispatch(showCourseInfo(true))
+    dispatch(selectCourse({ subject, number }))
+  }
+
   return (
     <Box
       p={1.5}
@@ -29,7 +39,8 @@ function Course({ depth = 1, type, pick = 1, value, displayType }) {
           return (
             <StyledChip
               key={`${_value.subject} ${_value.number}`}
-              label={`${_value.subject} ${_value.number}: ${_value.title}`}
+              onClickCapture={() => handleClick(_value.subject, _value.number)}
+              label={`${_value.subject} ${_value.number}${_value.title ? `: ${_value.title}` : ''}`}
               sx={{
                 backgroundColor: `hsla(0, 0%, ${7 + (depth + 1) * HSL_FACTOR}%, 1)`,
                 '&:hover': {

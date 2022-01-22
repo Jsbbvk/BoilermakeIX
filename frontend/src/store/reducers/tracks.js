@@ -20,6 +20,6 @@ export const tracksSlice = createSlice({
   },
 })
 
-export const { addTrack } = tracksSlice.actions
+export const { addTrack, removeTrack } = tracksSlice.actions
 
 export default tracksSlice.reducer
