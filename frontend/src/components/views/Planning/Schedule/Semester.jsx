@@ -71,7 +71,7 @@ function Semester({ index, title, courses }) {
         <IconButton title="Rename" onClick={promptRename} sx={{ ml: 'auto' }}>
           <EditIcon />
         </IconButton>
-        {lastSemester.title === title && (
+        {lastSemester && lastSemester.title === title && (
           <IconButton title="Delete" onClick={promptDelete}>
             <DeleteIcon />
           </IconButton>
@@ -81,8 +81,8 @@ function Semester({ index, title, courses }) {
         {courses.length === 0 ? (
           <Typography>No courses</Typography>
         ) : (
-          courses.map((course) => (
-            <p>
+          courses.map((course, i) => (
+            <p key={i}>
               {course.subject} {course.number}
             </p>
           ))

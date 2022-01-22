@@ -17,9 +17,15 @@ import CloseIcon from '@mui/icons-material/Close'
 import AddIcon from '@mui/icons-material/Add'
 import LinkIcon from '@mui/icons-material/Link'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { useDispatch, useSelector } from 'react-redux'
 import { getCourse } from '../../../api'
 import Course from '../../views/Planning/Course'
 import UserContext from '../../../userContext'
+import SelectDialog from '../SelectDialog'
+import { addCourseToSemester } from '../../../store'
+import AlertDialog from '../AlertDialog'
+
+// TODO: perhaps move this to a diff place besides common
 
 const style = {
   position: 'absolute',
@@ -46,6 +52,9 @@ const StyledChip = styled(Chip)({
 })
 
 function InfoPopup() {
+  const { semesters, lastSemester } = useSelector((state) => state.semester)
+  const dispatch = useDispatch()
+
   const [loading, setLoading] = useState(true)
   const [info, setInfo] = useState({})
   const [addable, setAddable] = useState(true)
@@ -69,6 +78,34 @@ function InfoPopup() {
 
   const handleClose = () => {
     setShow(false)
+  }
+
+  const [showAddDialog, setShowAdd] = useState(false)
+  const [semesterToAdd, setSemesterToAdd] = useState('')
+  const [showSuccessAdd, setShowSuccess] = useState(false)
+
+  const promptAdd = () => {
+    setShowAdd(true)
+    setSemesterToAdd(lastSemester ? lastSemester.title : '')
+  }
+
+  const cancelAdd = () => {
+    setShowAdd(false)
+  }
+
+  const handleAddChange = (e) => {
+    setSemesterToAdd(e.target.value)
+  }
+
+  const addToSemester = () => {
+    dispatch(
+      addCourseToSemester({
+        semester: semesterToAdd,
+        course: courseInfo,
+      })
+    )
+    setShowAdd(false)
+    setShowSuccess(true)
   }
 
   return (
@@ -130,12 +167,13 @@ function InfoPopup() {
                 </Accordion>
               )}
             </StyledAccordion>
-            <Box sx={{ mt: 2 }}>
+            <Box sx={{ mt: 2, textAlign: 'center' }}>
               <Button
                 variant="contained"
                 startIcon={<AddIcon />}
                 disabled={!addable}
                 title="Add to your semester schedule"
+                onClick={promptAdd}
               >
                 Add to Schedule
               </Button>
@@ -149,6 +187,26 @@ function InfoPopup() {
                 View webpage
               </Button>
             </Box>
+            <SelectDialog
+              open={showAddDialog}
+              onClose={cancelAdd}
+              onSubmit={addToSemester}
+              onChange={handleAddChange}
+              defaultValue={semesterToAdd}
+              options={semesters.map((semester) => semester.title)}
+              title={`Add ${courseInfo && `${courseInfo.subject} ${courseInfo.number}`}`}
+              message="Choose which semester to add course to"
+              label="Semester"
+              noOptionsMessage="No semesters created yet!"
+            />
+            <AlertDialog
+              open={showSuccessAdd}
+              onClose={() => setShowSuccess(false)}
+              title="Success"
+              message={`Successfully added ${
+                courseInfo && `${courseInfo.subject} ${courseInfo.number}`
+              } to ${semesterToAdd}`}
+            />
           </>
         )}
       </Box>
@@ -156,12 +214,4 @@ function InfoPopup() {
   )
 }
 
-// const mapStateToProps = (state) => ({
-//   open: state.course.showCourseInfo,
-//   course: state.course.courseSelected,
-// })
-
-// const InfoPopupRedux = connect(mapStateToProps)(InfoPopup)
-
-// export default InfoPopupRedux
 export default InfoPopup

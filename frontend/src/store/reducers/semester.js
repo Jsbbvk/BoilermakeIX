@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit'
 import { courseEquals } from '../../utilities'
 
 const initialState = {
-  // NOTE: semesters shud be format { index: int, title: str, courses: [] }
+  // NOTE: semesters shud be format { index: int, title: str, courses: [{ subject, number }] }
   semesters: [],
-  lastSemester: '',
+  lastSemester: null,
 }
 
 export const semestersSlice = createSlice({
@@ -37,29 +37,30 @@ export const semestersSlice = createSlice({
     },
     popSemester: (state) => {
       state.semesters.pop()
-      state.lastSemester = state.semesters[state.semesters.length - 1]
+      state.lastSemester =
+        state.semesters.length === 0 ? null : state.semesters[state.semesters.length - 1]
     },
     removeSemester: (state, action) => {
       state.semesters.splice(action.payload, 1)
-      state.lastSemester = state.semesters[state.semesters.length - 1]
+      state.lastSemester =
+        state.semesters.length === 0 ? null : state.semesters[state.semesters.length - 1]
     },
     renameSemester: (state, action) => {
       state.semesters[
         state.semesters.findIndex((semester) => semester.title === action.payload.title)
       ].title = action.payload.newTitle
-      state.lastSemester = state.semesters[state.semesters.length - 1]
     },
     addCourseToSemester: (state, action) => {
       // pass in { semesterTitle, courseObj }
       state.semesters
-        .at(state.semesters.find((sem) => sem.title === action.semesterTitle))
-        .courses.push(action.course)
+        .at(state.semesters.find((sem) => sem.title === action.payload.semesterTitle))
+        .courses.push(action.payload.course)
     },
     removeCourseFromSemester: (state, action) => {
       // pass in { semesterTitle, courseObj }
       state.semesters
-        .at(state.semesters.find((sem) => sem.title === action.semesterTitle))
-        .courses.filter((course) => !courseEquals(course, action.course))
+        .at(state.semesters.find((sem) => sem.title === action.paylod.semesterTitle))
+        .courses.filter((course) => !courseEquals(course, action.payload.course))
     },
   },
 })
