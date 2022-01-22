@@ -1569,7 +1569,7 @@
         "course_id": "CS 35200",
         "subject": "CS",
         "number": 35200,
-        "title": "Compilers: Principles And PracticeCS 35400 - Operating SystemsCS 37300 - Data Mining And Machine LearningCS 38100 - Introduction To The Analysis Of AlgorithmsCS 42200 - Computer NetworksCS 43400 - Advanced Computer GraphicsCS 45600 - Programming LanguagesCS 47100 - Introduction to Artificial IntelligenceCS 49000 - Topics In Computer Sciences For Undergraduates - Intro to Data Viz"
+        "title": "Compilers: Principles And Practice"
     },
     {
         "course_id": "CS 35300",
@@ -1593,7 +1593,7 @@
         "course_id": "CS 37300",
         "subject": "CS",
         "number": 37300,
-        "title": "Data Mining And Machine LearningCS 43400 - Advanced Computer GraphicsCS 47100 - Introduction to Artificial Intelligence"
+        "title": "Data Mining And Machine Learning"
     },
     {
         "course_id": "CS 38100",
@@ -1624,6 +1624,12 @@
         "subject": "CS",
         "number": 42600,
         "title": "Computer Security"
+    },
+    {
+        "course_id": "CS 43400",
+        "subject": "CS",
+        "number": 43400,
+        "title": "Advanced Computer Graphics"
     },
     {
         "course_id": "CS 44800",
@@ -1671,7 +1677,7 @@
         "course_id": "CS 49000",
         "subject": "CS",
         "number": 49000,
-        "title": "Topics In Computer Sciences For Undergraduates"
+        "title": "Topics In Computer Sciences For Undergraduates - Intro to Data Viz"
     },
     {
         "course_id": "CS 49700",
@@ -5601,7 +5607,13 @@
         "course_id": "PHYS 23300",
         "subject": "PHYS",
         "number": 23300,
-        "title": "Physics For Life Sciences IPHYS 23400 - Physics For Life Sciences II"
+        "title": "Physics For Life Sciences I"
+    },
+    {
+        "course_id": "PHYS 23400",
+        "subject": "PHYS",
+        "number": 23400,
+        "title": "Physics For Life Sciences II"
     },
     {
         "course_id": "PHYS 24100",

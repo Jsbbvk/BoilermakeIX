@@ -9,6 +9,8 @@ import {
   IconButton,
   Button,
   Modal,
+  Skeleton,
+  Stack,
 } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
@@ -71,7 +73,7 @@ function InfoPopup() {
 
   return (
     <Modal
-      open={showCourseInfo}
+      open={showCourseInfo ?? false}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
@@ -89,9 +91,14 @@ function InfoPopup() {
           {courseInfo && info.title}
         </Typography>
         {loading ? (
-          <Typography id="modal-modal-description" sx={{ mb: 2 }}>
-            Loading...
-          </Typography>
+          <Stack spacing={1}>
+            <Skeleton variant="rectangular" width="100%" height={60} />
+            <Box sx={{ display: 'flex', mt: 0, mb: 0 }}>
+              <Skeleton variant="text" width="55%" />
+              <Skeleton variant="text" width="45%" sx={{ ml: 2 }} />
+            </Box>
+            <Skeleton variant="text" width="100%" />
+          </Stack>
         ) : (
           <>
             <Typography sx={{ mb: 1 }}>

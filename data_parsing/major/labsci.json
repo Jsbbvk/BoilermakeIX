@@ -372,7 +372,16 @@
                         "subject": "PHYS",
                         "number": 22000,
                         "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=PHYS&crse_numb_in=22000",
-                        "title": "General PhysicsPHYS 22100 - General Physics"
+                        "title": "General Physics"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "PHYS",
+                        "number": 22100,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=PHYS&crse_numb_in=22100",
+                        "title": "General Physics"
                     }
                 }
             ]
@@ -387,7 +396,16 @@
                         "subject": "PHYS",
                         "number": 23300,
                         "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=PHYS&crse_numb_in=23300",
-                        "title": "Physics For Life Sciences IPHYS 23400 - Physics For Life Sciences II"
+                        "title": "Physics For Life Sciences I"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "PHYS",
+                        "number": 23400,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=PHYS&crse_numb_in=23400",
+                        "title": "Physics For Life Sciences II"
                     }
                 }
             ]

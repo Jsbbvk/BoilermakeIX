@@ -1,8 +1,6 @@
 {
     "title": "General Education",
-    "size": "large",
-    "type": "or",
-    "pick": 3,
+    "type": "pick 3",
     "value": [
         {
             "type": "course",

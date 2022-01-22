@@ -2,7 +2,7 @@ from utilities import parse_courses
 import json
 
 cgviz = {
-    "title": "Database and Information Systems Track",
+    "title": "Computer Graphics and Visualization Track",
     "type": "and", 
     "value": [
         {
@@ -15,9 +15,9 @@ cgviz = {
 				{
 					"type": "or",
 					"value": parse_courses([
-						"CS 37300 - Data Mining And Machine Learning"
-						"CS 43400 - Advanced Computer Graphics"
-						"CS 47100 - Introduction to Artificial Intelligence "
+						"CS 37300 - Data Mining And Machine Learning",
+						"CS 43400 - Advanced Computer Graphics",
+						"CS 47100 - Introduction to Artificial Intelligence ",
 					])
 				}
 			]
@@ -26,15 +26,15 @@ cgviz = {
             "title": "Electives",
             "type": "pick 3",
             "value": parse_courses([
-				"CS 35200 - Compilers: Principles And Practice"
-				"CS 35400 - Operating Systems"
-				"CS 37300 - Data Mining And Machine Learning"
-				"CS 38100 - Introduction To The Analysis Of Algorithms"
-				"CS 42200 - Computer Networks"
-				"CS 43400 - Advanced Computer Graphics"
-				"CS 45600 - Programming Languages"
-				"CS 47100 - Introduction to Artificial Intelligence"
-				"CS 49000 - Topics In Computer Sciences For Undergraduates - Intro to Data Viz"
+				"CS 35200 - Compilers: Principles And Practice",
+				"CS 35400 - Operating Systems",
+				"CS 37300 - Data Mining And Machine Learning",
+				"CS 38100 - Introduction To The Analysis Of Algorithms",
+				"CS 42200 - Computer Networks",
+				"CS 43400 - Advanced Computer Graphics",
+				"CS 45600 - Programming Languages",
+				"CS 47100 - Introduction to Artificial Intelligence",
+				"CS 49000 - Topics In Computer Sciences For Undergraduates - Intro to Data Viz",
 			])
         }
     ]

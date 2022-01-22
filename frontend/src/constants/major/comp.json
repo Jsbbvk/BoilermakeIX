@@ -1,7 +1,6 @@
 {
     "title": "Composition & Presentation",
     "type": "and",
-    "size": "large",
     "value": [
         {
             "title": "First-Year Composition",
@@ -109,8 +108,7 @@
                     ]
                 },
                 {
-                    "type": "or",
-                    "pick": 2,
+                    "type": "pick 2",
                     "value": [
                         {
                             "type": "course",

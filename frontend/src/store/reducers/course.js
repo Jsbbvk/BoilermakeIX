@@ -2,12 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   previousCourses: [],
-  showCourseInfo: false,
-  courseSelected: null,
 }
 
 export const courseSlice = createSlice({
-  name: 'courses',
+  name: 'course',
   initialState,
   reducers: {
     addCourse: (state, action) => {
