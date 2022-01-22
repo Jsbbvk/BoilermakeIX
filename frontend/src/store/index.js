@@ -7,4 +7,4 @@ export const store = configureStore({
   },
 })
 
-export { addCourse, removeCourse } from './reducers/course'
+export { addCourse, removeCourse, setCourse } from './reducers/course'

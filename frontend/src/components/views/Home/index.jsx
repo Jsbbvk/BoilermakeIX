@@ -15,10 +15,10 @@ import {
   Stack,
   Fade,
 } from '@mui/material'
-import { useState, useRef } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Planning from '../Planning'
-import { addCourse, removeCourse } from '../../../store'
+import { setCourse, addCourse, removeCourse } from '../../../store'
 import COURSES from '../../../constants/allcourses.json'
 
 const StyledChip = styled(Chip, {
@@ -81,18 +81,18 @@ function Home() {
       p.find((t) => t === track) ? p.filter((t) => t !== track) : [...p, track]
     )
   }
-
   const onCourseChange = (_, course, details) => {
     if (details !== 'selectOption') return
+
+    setCourseInputValue('')
+    setCourseValue(null)
+    setSelectedCourses((p) => [...p, course])
     dispatch(
       addCourse({
         subject: course.split(' ')[0],
         number: parseInt(course.split(' ')[1].slice(0, -1)),
       })
     )
-    setCourseInputValue('')
-    setCourseValue(null)
-    setSelectedCourses((p) => [...p, course])
   }
 
   const onCourseDelete = (course) => {

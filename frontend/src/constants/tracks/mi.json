@@ -83,7 +83,8 @@
         },
         {
             "title": "Electives",
-            "type": "pick 2",
+            "type": "or",
+            "pick": 2,
             "value": [
                 {
                     "type": "course",

@@ -19,9 +19,12 @@ export const courseSlice = createSlice({
         ({ subject: _subject, number: _number }) => !(subject === _subject && number === _number)
       )
     },
+    setCourse: (state, action) => {
+      state.previousCourses = action.payload
+    },
   },
 })
 
-export const { addCourse, removeCourse } = courseSlice.actions
+export const { addCourse, removeCourse, setCourse } = courseSlice.actions
 
 export default courseSlice.reducer

@@ -7,11 +7,14 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  LinearProgress,
+  Stack,
+  CircularProgress,
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { useSelector } from 'react-redux'
-import { memo, useEffect } from 'react'
-import { courseExist } from '../../../../utilities'
+import { connect } from 'react-redux'
+import { memo, useMemo } from 'react'
+import { getPercentageOfCompletion, coursesInList } from '../../../../utilities'
 
 const StyledChip = styled(Chip)({
   margin: 6,
@@ -22,15 +25,7 @@ const StyledChip = styled(Chip)({
 const HSL_FACTOR = 5
 
 const Course = memo(({ depth = 1, type, pick = 1, value, displayType, title }) => {
-  const { previousCourses } = useSelector((state) => state.course)
-
-  const findCourse = ({ subject, number }) =>
-    previousCourses.some(
-      ({ subject: _subject, number: _number }) => subject === _subject && number === _number
-    )
-
   if (depth > 4) {
-    console.log('max depth reached')
     return null
   }
 
@@ -46,32 +41,33 @@ const Course = memo(({ depth = 1, type, pick = 1, value, displayType, title }) =
         expandIcon={<ExpandMoreIcon />}
         sx={{
           alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
-        <Typography>
-          <b>{displayType?.toUpperCase()}</b> {displayType ? 'p' : 'P'}ick{' '}
-          {type === 'and' ? 'all' : pick} {`course${type === 'and' || pick > 1 ? 's' : ''}`}
-          <b>{depth === 1 || !title ? '' : ` from ${title}`}</b>
-        </Typography>
+        <Stack direction="row" alignItems="center" spacing={2}>
+          <Typography>
+            <b>{displayType?.toUpperCase()}</b> {displayType ? 'p' : 'P'}ick{' '}
+            {type === 'and' ? 'all' : pick} {`course${type === 'and' || pick > 1 ? 's' : ''}`}
+            {depth === 1 || !title ? (
+              ''
+            ) : (
+              <span>
+                {' '}
+                from <b>{title}</b>
+              </span>
+            )}
+          </Typography>
+          {depth !== 1 && title && <PercentageDisplay value={{ type, value }} />}
+        </Stack>
       </AccordionSummary>
       <AccordionDetails>
         {value.map(({ type: _type, value: _value, pick: _pick, title: _title }, i) => {
           if (_type === 'course') {
-            const foundCourse = findCourse(_value)
             return (
-              <StyledChip
+              <CourseChip
                 key={`${depth}-${_value.subject}-${_value.number}-${uuidv4()}`}
-                label={`${_value.subject} ${_value.number}: ${_value.title}`}
-                sx={{
-                  backgroundColor: foundCourse
-                    ? '#2e7d32'
-                    : `hsla(0, 0%, ${7.5 + depth * HSL_FACTOR}%, 1)`,
-                  '&:hover': {
-                    backgroundColor: foundCourse
-                      ? '#388e3c'
-                      : `hsla(0, 0%, ${3 + depth * HSL_FACTOR}%, 1)`,
-                  },
-                }}
+                val={_value}
+                d={depth}
               />
             )
           }
@@ -95,5 +91,79 @@ const Course = memo(({ depth = 1, type, pick = 1, value, displayType, title }) =
     </Accordion>
   )
 })
+
+const mapStateToProps = (state) => ({
+  previousCourses: state.course.previousCourses,
+})
+
+const PercentageDisplay = connect(mapStateToProps)(
+  memo(
+    ({ previousCourses, value }) => {
+      const pValue = useMemo(
+        () => getPercentageOfCompletion(value, previousCourses, 100),
+        [value, previousCourses]
+      )
+
+      console.log('rerendering')
+      return (
+        <Box
+          sx={{
+            width: '75px',
+            color: () => {
+              if (pValue < 50) return '#d32f2f'
+              if (pValue < 100) return '#fbc02d'
+              return '#66bb6a'
+            },
+          }}
+        >
+          <LinearProgress variant="determinate" value={pValue} color="inherit" />
+        </Box>
+      )
+    },
+    (prev, next) => {
+      // console.log(prev, next)
+    }
+  )
+)
+
+const CourseChip = connect(mapStateToProps)(
+  memo(
+    ({ val, d, previousCourses }) => {
+      const findCourse = ({ subject, number }) =>
+        previousCourses?.some(
+          ({ subject: _subject, number: _number }) => subject === _subject && number === _number
+        )
+
+      return (
+        <StyledChip
+          label={`${val.subject} ${val.number}: ${val.title}`}
+          sx={{
+            backgroundColor: findCourse(val)
+              ? '#2e7d32'
+              : `hsla(0, 0%, ${7.5 + d * HSL_FACTOR}%, 1)`,
+            '&:hover': {
+              backgroundColor: findCourse(val)
+                ? '#388e3c'
+                : `hsla(0, 0%, ${3 + d * HSL_FACTOR}%, 1)`,
+            },
+          }}
+        />
+      )
+    },
+    (prev, next) => {
+      const existsInPrev = !!prev?.previousCourses?.find(
+        ({ subject: _subject, number: _number }) =>
+          prev?.val?.subject === _subject && prev?.val?.number === _number
+      )
+
+      const existsInNext = !!next?.previousCourses?.find(
+        ({ subject: _subject, number: _number }) =>
+          next?.val?.subject === _subject && next?.val?.number === _number
+      )
+
+      return existsInNext === existsInPrev
+    }
+  )
+)
 
 export default Course

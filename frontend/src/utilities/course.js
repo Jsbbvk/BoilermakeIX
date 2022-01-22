@@ -21,6 +21,29 @@ export const courseExist = ({ type, value }, prevCourses) => {
   }
 }
 
+export const coursesInList = ({ type, value }, list) => {
+  if (list.length === 0) return []
+  // console.log('courseList')
+  if (type === 'and' || type === 'or') {
+    return value.flatMap((obj) => coursesInList(obj, list))
+  }
+
+  if (type === 'course') return list.find((c) => courseEquals(c, value)) ? [value] : []
+}
+
+export const getPercentageOfCompletion = ({ type, value }, list, percentage) => {
+  if (list.length === 0) return percentage
+  console.log('percentage')
+  if (type === 'course') return list.find((c) => courseEquals(c, value)) ? percentage : 0
+
+  const singlePercentage = type === 'and' ? Math.round(percentage / value.length) : percentage
+
+  return Math.min(
+    percentage,
+    value.reduce((prev, curr) => prev + getPercentageOfCompletion(curr, list, singlePercentage), 0)
+  )
+}
+
 export const checkPrereqs = (course, prevCourses) => courseExist(course.prereqs, prevCourses)
 
 export const hasTaken = (course, prevCourses) =>
