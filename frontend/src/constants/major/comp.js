@@ -1,0 +1,1 @@
+const COMP = JSON.parse()
