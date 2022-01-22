@@ -30,6 +30,6 @@ for folder in folders:
 		rec(data)
 
 x = list(courses.keys())
-x.sort()
+
 with open("allcourses.json", "w") as file:
 	file.write(json.dumps(x, indent=4))
