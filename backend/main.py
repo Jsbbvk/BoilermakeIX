@@ -20,7 +20,7 @@ def getcourse():
 	number = request.args["number"]
 	if not number.isnumeric(): return 500
 
-	res = get_course(subject, number)
+	res = get_course(subject, int(number))
 	if res == None: return 404
 	response = jsonify(res)
 	response.status = 200

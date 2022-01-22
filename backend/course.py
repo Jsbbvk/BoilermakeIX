@@ -60,20 +60,59 @@ def get_course(subject, number):
                     prereqs[-1]["value"].append(last)
 
         if subject == "CS" and number == 18000:
+            prereqs = [
+				{
+					"type": "and",
+					"value": [
+						{
+							"type": "course_corequisite",
+							"value": Course("CS", 19100, "Freshman Resources Seminar").get_dict()
+						},
+						{
+							"type": "course_corequisite",
+							"value": Course("CS", 19300, "Tools").get_dict()
+						},
+						prereqs[0]
+					]
+				}
+			]
+			
+        if subject == "CS" and number == 18200:
+            print ("yes")
             prereqs = [{
-                "type": "and",
-                "value": [
-                    {
-                        "type": "course_corequisite",
-                        "value": Course("CS", 19100, "Freshman Resources Seminar").get_dict()
-                    },
-                    {
-                        "type": "course_corequisite",
-                        "value": Course("CS", 19300, "Tools").get_dict()
-                    },
-                    prereqs[0]
-                ]
-            }]
+				"type": "and",
+				"value": [
+					{
+						"type": "course", 
+						"value": Course("CS", 18000, "Problem Solving And Object-Oriented Programming").get_dict()
+					},
+					{
+						"type": "or",
+						"value": [
+							{
+								"type": "course",
+								"value": {
+									"subject": "MA",
+									"number": 16100,
+									"url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=MA&crse_numb_in=16100",
+									"title": "Plane Analytic Geometry And Calculus I"
+								}
+							},
+							{
+								"type": "course",
+								"value": {
+									"subject": "MA",
+									"number": 16500,
+									"url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=MA&crse_numb_in=16500",
+									"title": "Analytic Geometry And Calculus I"
+								}
+							}
+						]
+					},
+				]
+			}]
+
+        if prereqs[0]["type"] == "or" and len(prereqs[0]["value"]) <= 1: prereqs[0] = {"type": "and", "value": []}
 
         return Course(subject, number, title, credits, description, prereqs[0]).get_dict()
     except Exception as e:
