@@ -1,1 +1,0 @@
-export { allUcore } from './ucore'
