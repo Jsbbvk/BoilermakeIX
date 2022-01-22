@@ -11,7 +11,7 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useSelector, useDispatch } from 'react-redux'
 import Course from './Course'
-// import { HUM, IL, BSS } from '../../../constants/ucore'
+import UCORE from '../../../constants/ucore'
 
 const StyledAccordion = styled(Accordion)({
   backgroundColor: '#dba8574f',
@@ -20,56 +20,6 @@ const StyledAccordion = styled(Accordion)({
 const StyledChip = styled(Chip)({
   margin: 6,
 })
-
-const temp = {
-  type: 'or',
-  pick: 2,
-  value: [
-    {
-      type: 'course',
-      value: 'AMST 10100: America and the World',
-    },
-    {
-      type: 'course',
-      value: 'CS 25000: Compilers: Principles And Practice',
-    },
-    {
-      type: 'and',
-      value: [
-        {
-          type: 'course',
-          value: 'AMST 10100: America and the World',
-        },
-        {
-          type: 'course',
-          value: 'CS 25000: Compilers: Principles And Practice',
-        },
-        {
-          type: 'or',
-          pick: 2,
-          value: [
-            {
-              type: 'course',
-              value: 'AMST 10100: America and the World',
-            },
-            {
-              type: 'course',
-              value: 'CS 25000: Compilers: Principles And Practice',
-            },
-            {
-              type: 'course',
-              value: 'AMST 10100: America and the World',
-            },
-            {
-              type: 'course',
-              value: 'CS 25000: Compilers: Principles And Practice',
-            },
-          ],
-        },
-      ],
-    },
-  ],
-}
 
 function Planning() {
   const { previousCourses } = useSelector((state) => state.course)
@@ -89,19 +39,21 @@ function Planning() {
             <Typography variant="h6">University Core Curriculum</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                sx={{
-                  alignItems: 'center',
-                }}
-              >
-                <Typography variant="h6">Written Communication</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Course {...temp} />
-              </AccordionDetails>
-            </Accordion>
+            {Object.values(UCORE).map((curriculum) => (
+              <Accordion key={curriculum.title}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  sx={{
+                    alignItems: 'center',
+                  }}
+                >
+                  <Typography variant="h6">{curriculum.title}</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Course {...curriculum} />
+                </AccordionDetails>
+              </Accordion>
+            ))}
           </AccordionDetails>
         </StyledAccordion>
       </Box>

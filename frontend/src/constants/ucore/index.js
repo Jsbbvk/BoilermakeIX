@@ -6,6 +6,4 @@ import QR_JSON from './qr.json'
 import STS_JSON from './sts.json'
 import WC_JSON from './wc.json'
 
-const createCurriculum = (json) => ({
-  title: json.title,
-})
+export default { BSS_JSON, HUM_JSON, IL_JSON, OC_JSON, QR_JSON, STS_JSON, WC_JSON }

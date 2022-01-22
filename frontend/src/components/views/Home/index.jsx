@@ -94,7 +94,14 @@ function Home() {
   }
 
   const onStartPlanning = () => {
-    dispatch(setCourses(selectedCourses))
+    dispatch(
+      setCourses(
+        selectedCourses.map((course) => ({
+          subject: course.split(' ')[0],
+          number: parseInt(course.split(' ')[1].slice(0, -1)),
+        }))
+      )
+    )
     setShowPlanning(true)
   }
 
@@ -116,7 +123,7 @@ function Home() {
           </Box>
         </Box>
         <Box mt={6}>
-          <Typography variant="h6">Previous Courses</Typography>
+          <Typography variant="h6">Previous/Current Courses</Typography>
           <Stack alignItems="center">
             <Autocomplete
               disablePortal
@@ -145,7 +152,7 @@ function Home() {
                 <TextField
                   {...params}
                   autoComplete="off"
-                  label="Enter previous courses"
+                  label="Enter previous/current courses"
                   variant="standard"
                 />
               )}

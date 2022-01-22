@@ -26,15 +26,6 @@
                 "subject": "COM",
                 "number": 25100,
                 "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=COM&crse_numb_in=25100",
-                "title": "Intro to Electronic Mass Media"
-            }
-        },
-        {
-            "type": "course",
-            "value": {
-                "subject": "COM",
-                "number": 25100,
-                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=COM&crse_numb_in=25100",
                 "title": "Communication, Information and Society"
             }
         },
