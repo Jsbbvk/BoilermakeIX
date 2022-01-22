@@ -9,10 +9,10 @@ import {
   AccordionDetails,
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { useDispatch, useSelector } from 'react-redux'
-import { memo, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { memo, useEffect, useContext } from 'react'
 import { courseExist } from '../../../../utilities'
-import { selectCourse, showCourseInfo } from '../../../../store'
+import UserContext from '../../../../userContext'
 
 const StyledChip = styled(Chip)({
   margin: 6,
@@ -25,7 +25,7 @@ const HSL_FACTOR = 5
 const Course = memo(({ depth = 1, type, pick = 1, value, displayType, title }) => {
   const { previousCourses } = useSelector((state) => state.course)
 
-  const dispatch = useDispatch()
+  const { setShow, setCourse } = useContext(UserContext)
 
   const findCourse = ({ subject, number }) =>
     previousCourses.some(
@@ -38,8 +38,8 @@ const Course = memo(({ depth = 1, type, pick = 1, value, displayType, title }) =
   }
 
   const handleClick = (subject, number) => {
-    dispatch(showCourseInfo(true))
-    dispatch(selectCourse({ subject, number }))
+    setShow(true)
+    setCourse({ subject, number })
   }
 
   return (

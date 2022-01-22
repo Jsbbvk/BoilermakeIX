@@ -10,15 +10,14 @@ import {
   Button,
   Modal,
 } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import AddIcon from '@mui/icons-material/Add'
 import LinkIcon from '@mui/icons-material/Link'
-import { connect, useDispatch } from 'react-redux'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { getCourse } from '../../../api'
-import { showCourseInfo } from '../../../store'
 import Course from '../../views/Planning/Course'
+import UserContext from '../../../userContext'
 
 const style = {
   position: 'absolute',
@@ -44,36 +43,35 @@ const StyledChip = styled(Chip)({
   margin: 6,
 })
 
-function InfoPopup({ open, course }) {
+function InfoPopup() {
   const [loading, setLoading] = useState(true)
   const [info, setInfo] = useState({})
   const [addable, setAddable] = useState(true)
-  const dispatch = useDispatch()
+  const { showCourseInfo, courseInfo, setShow } = useContext(UserContext)
 
   useEffect(() => {
     async function getCourseFetch() {
-      const res = await getCourse(course.subject, course.number)
+      const res = await getCourse(courseInfo.subject, courseInfo.number)
       if (res !== null) {
         setInfo(res)
         setLoading(false)
-        console.log(res)
       }
     }
-    if (course) {
+    if (courseInfo) {
       setLoading(true)
       getCourseFetch()
       // TODO: check if course is addable to semester (e.g. doesn't exist on schedule, prereqs met)
       setAddable(true)
     }
-  }, [course])
+  }, [courseInfo])
 
   const handleClose = () => {
-    dispatch(showCourseInfo(false))
+    setShow(false)
   }
 
   return (
     <Modal
-      open={open}
+      open={showCourseInfo}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
@@ -87,7 +85,8 @@ function InfoPopup({ open, course }) {
           <CloseIcon />
         </IconButton>
         <Typography variant="h5" sx={{ mb: 2 }}>
-          {course && course.subject} {course && course.number} - {course && info.title}
+          {courseInfo && courseInfo.subject} {courseInfo && courseInfo.number} -{' '}
+          {courseInfo && info.title}
         </Typography>
         {loading ? (
           <Typography id="modal-modal-description" sx={{ mb: 2 }}>
@@ -150,11 +149,12 @@ function InfoPopup({ open, course }) {
   )
 }
 
-const mapStateToProps = (state) => ({
-  open: state.course.showCourseInfo,
-  course: state.course.courseSelected,
-})
+// const mapStateToProps = (state) => ({
+//   open: state.course.showCourseInfo,
+//   course: state.course.courseSelected,
+// })
 
-const InfoPopupRedux = connect(mapStateToProps)(InfoPopup)
+// const InfoPopupRedux = connect(mapStateToProps)(InfoPopup)
 
-export default InfoPopupRedux
+// export default InfoPopupRedux
+export default InfoPopup

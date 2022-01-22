@@ -2,6 +2,7 @@ import { Button, CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Home from './components/views/Home'
 import InfoPopup from './components/common/InfoPopup'
+import UserProvider from './components/Provider'
 
 const theme = createTheme({
   typography: {
@@ -23,8 +24,10 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Home />
-      <InfoPopup />
+      <UserProvider>
+        <Home />
+        <InfoPopup />
+      </UserProvider>
     </ThemeProvider>
   )
 }
