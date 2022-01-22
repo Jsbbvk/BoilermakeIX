@@ -1,0 +1,60 @@
+{
+    "title": "CS Core",
+    "type": "and",
+    "value": [
+        {
+            "type": "course",
+            "value": {
+                "subject": "CS",
+                "number": 18000,
+                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=18000",
+                "title": "Problem Solving And Object-Oriented Programming"
+            }
+        },
+        {
+            "type": "course",
+            "value": {
+                "subject": "CS",
+                "number": 18200,
+                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=18200",
+                "title": "Foundations Of Computer Science"
+            }
+        },
+        {
+            "type": "course",
+            "value": {
+                "subject": "CS",
+                "number": 24000,
+                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=24000",
+                "title": "Programming In C"
+            }
+        },
+        {
+            "type": "course",
+            "value": {
+                "subject": "CS",
+                "number": 25000,
+                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=25000",
+                "title": "Computer Architecture"
+            }
+        },
+        {
+            "type": "course",
+            "value": {
+                "subject": "CS",
+                "number": 25100,
+                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=25100",
+                "title": "Data Structures And Algorithms"
+            }
+        },
+        {
+            "type": "course",
+            "value": {
+                "subject": "CS",
+                "number": 25200,
+                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=25200",
+                "title": "Systems Programming "
+            }
+        }
+    ]
+}

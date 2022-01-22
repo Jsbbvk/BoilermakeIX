@@ -1,0 +1,204 @@
+{
+    "title": "Algorithmic Foundations Track",
+    "type": "and",
+    "value": [
+        {
+            "title": "Required",
+            "type": "and",
+            "value": [
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CS",
+                        "number": 38100,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=38100",
+                        "title": "Introduction To The Analysis Of Algorithms"
+                    }
+                },
+                {
+                    "type": "or",
+                    "value": [
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "CS",
+                                "number": 35200,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=35200",
+                                "title": "Compilers: Principles And Practice"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "CS",
+                                "number": 35400,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=35400",
+                                "title": "Operating Systems"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "or",
+                    "value": [
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "CS",
+                                "number": 37300,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=37300",
+                                "title": "Data Mining And Machine Learning"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "CS",
+                                "number": 47100,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=47100",
+                                "title": "Introduction to Artificial Intelligence"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Electives",
+            "type": "pick 3",
+            "value": [
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CS",
+                        "number": 31400,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=31400",
+                        "title": "Numerical Methods"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CS",
+                        "number": 33400,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=33400",
+                        "title": "Fundamentals Of Computer Graphics"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CS",
+                        "number": 35300,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=35300",
+                        "title": "Principles Of Concurrency And Parallelism"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CS",
+                        "number": 35500,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=35500",
+                        "title": "Introduction To Cryptography"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CS",
+                        "number": 44800,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=44800",
+                        "title": "Introduction To Relational Database Systems"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CS",
+                        "number": 45600,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=45600",
+                        "title": "Programming Languages"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CS",
+                        "number": 48300,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=48300",
+                        "title": "Introduction To The Theory Of Computation"
+                    }
+                },
+                {
+                    "type": "or",
+                    "value": [
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "MA",
+                                "number": 34100,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=MA&crse_numb_in=34100",
+                                "title": "Foundations Of Analysis"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "MA",
+                                "number": 35301,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=MA&crse_numb_in=35301",
+                                "title": "Linear Algebra II"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "MA",
+                                "number": 36200,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=MA&crse_numb_in=36200",
+                                "title": "Topics In Vector Calculus"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "MA",
+                                "number": 36600,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=MA&crse_numb_in=36600",
+                                "title": "Ordinary Differential Equations"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "MA",
+                                "number": 38500,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=MA&crse_numb_in=38500",
+                                "title": "Introduction To Logic"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "MA",
+                                "number": 42100,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=MA&crse_numb_in=42100",
+                                "title": "Linear Programming And Optimization Techniques"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "MA",
+                                "number": 45300,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=MA&crse_numb_in=45300",
+                                "title": "Elements Of Algebra I"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
