@@ -1,9 +1,10 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from itsdangerous import json
 from course import get_course
 
 app = Flask(__name__)
-CORS(app)
+cors = CORS(app, resources={r"/api/*": {"origins": ["*", "https://localhost:3000"], }})
 
 @app.route("/", methods=["GET"])
 def index():
@@ -18,7 +19,11 @@ def getcourse():
 
 	res = get_course(subject, number)
 	if res == None: return 404
-	return jsonify(res), 200
+	response = jsonify(res)
+	response.status = 200
+	response.headers.add('Access-Control-Allow-Origin', '*')
+	response.headers.add
+	return response
 
 if __name__ == "__main__":
     print ("=" * 50)

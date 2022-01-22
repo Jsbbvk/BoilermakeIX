@@ -29,7 +29,7 @@ for folder in folders:
 		print (file)
 		rec(data)
 
-x = list(courses.keys())
+x = list(courses.values())
 
 with open("allcourses.json", "w") as file:
 	file.write(json.dumps(x, indent=4))

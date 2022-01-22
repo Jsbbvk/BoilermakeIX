@@ -63,7 +63,7 @@
         "course_id": "COM 21700",
         "subject": "COM",
         "number": 21700,
-        "title": "Science Writing And Presentation"
+        "title": "Science Writing and Presentations"
     },
     {
         "course_id": "CHM 46200",
@@ -81,7 +81,7 @@
         "course_id": "COM 11400",
         "subject": "COM",
         "number": 11400,
-        "title": "Fundamentals of Speech CommunicationCOM 21700 - Science Writing and PresentationsEDCI 49600 - Student Teaching in the Elementary School (Fall 2021 and after only)EDCI 49800 - Supervised Teaching (Fall 2021 and after only)EDPS 31500 - Collaborative Leadership: Interpersonal Skills  (Fall 2013 and after only)EDPS 49800 - Supervised Teaching- Special Education (Fall 2021 and after only)HDFS 45000 - Supervised Teaching in Inclusive Programs for Young Children (Fall 2021 and after only)SCLA 10200 - Transformative Texts: Critical Thinking & Communication II: Modern World"
+        "title": "Fundamentals of Speech Communication"
     },
     {
         "course_id": "COM 31400",
@@ -111,7 +111,7 @@
         "course_id": "SCLA 10200",
         "subject": "SCLA",
         "number": 10200,
-        "title": "Transformative Texts, Critical Thinking And Communication II: Modern World"
+        "title": "Transformative Texts: Critical Thinking & Communication II: Modern World"
     },
     {
         "course_id": "ENGL 30400",
@@ -6094,6 +6094,36 @@
         "subject": "PHIL",
         "number": 15000,
         "title": "Principles Of Logic"
+    },
+    {
+        "course_id": "EDCI 49600",
+        "subject": "EDCI",
+        "number": 49600,
+        "title": "Student Teaching in the Elementary School (Fall 2021 and after only)"
+    },
+    {
+        "course_id": "EDCI 49800",
+        "subject": "EDCI",
+        "number": 49800,
+        "title": "Supervised Teaching (Fall 2021 and after only)"
+    },
+    {
+        "course_id": "EDPS 31500",
+        "subject": "EDPS",
+        "number": 31500,
+        "title": "Collaborative Leadership: Interpersonal Skills  (Fall 2013 and after only)"
+    },
+    {
+        "course_id": "EDPS 49800",
+        "subject": "EDPS",
+        "number": 49800,
+        "title": "Supervised Teaching- Special Education (Fall 2021 and after only)"
+    },
+    {
+        "course_id": "HDFS 45000",
+        "subject": "HDFS",
+        "number": 45000,
+        "title": "Supervised Teaching in Inclusive Programs for Young Children (Fall 2021 and after only)"
     },
     {
         "course_id": "AGEC 20300",
