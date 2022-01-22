@@ -1,4 +1,4 @@
-const CS_CORE = JSON.parse(`{
+{
     "title": "CS Core",
     "type": "and",
     "value": [
@@ -57,6 +57,4 @@ const CS_CORE = JSON.parse(`{
             }
         }
     ]
-}`)
-
-export default CS_CORE
+}

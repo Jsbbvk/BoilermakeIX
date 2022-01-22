@@ -1,4 +1,4 @@
-const DBIS = JSON.parse(`{
+{
     "title": "Database and Information Systems Track",
     "type": "and",
     "value": [
@@ -197,6 +197,4 @@ const DBIS = JSON.parse(`{
             ]
         }
     ]
-}`)
-
-export default DBIS
+}

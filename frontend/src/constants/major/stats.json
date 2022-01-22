@@ -1,4 +1,3 @@
-const STATS = JSON.parse(`
 {
     "title": "Statistics",
     "type": "or",
@@ -23,6 +22,3 @@ const STATS = JSON.parse(`
         }
     ]
 }
-`)
-
-export default STATS

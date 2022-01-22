@@ -18,7 +18,7 @@ import {
 import { useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Planning from '../Planning'
-import { setCourses } from '../../../store'
+import { addCourse, removeCourse } from '../../../store'
 import COURSES from '../../../constants/allcourses.json'
 
 const StyledChip = styled(Chip, {
@@ -84,6 +84,12 @@ function Home() {
 
   const onCourseChange = (_, course, details) => {
     if (details !== 'selectOption') return
+    dispatch(
+      addCourse({
+        subject: course.split(' ')[0],
+        number: parseInt(course.split(' ')[1].slice(0, -1)),
+      })
+    )
     setCourseInputValue('')
     setCourseValue(null)
     setSelectedCourses((p) => [...p, course])
@@ -91,24 +97,22 @@ function Home() {
 
   const onCourseDelete = (course) => {
     setSelectedCourses((p) => p.filter((c) => c !== course))
+    dispatch(
+      removeCourse({
+        subject: course.split(' ')[0],
+        number: parseInt(course.split(' ')[1].slice(0, -1)),
+      })
+    )
   }
 
   const onStartPlanning = () => {
-    dispatch(
-      setCourses(
-        selectedCourses.map((course) => ({
-          subject: course.split(' ')[0],
-          number: parseInt(course.split(' ')[1].slice(0, -1)),
-        }))
-      )
-    )
     setShowPlanning(true)
   }
 
   return (
     <Container sx={{ py: 7 }}>
       <Box sx={{ textAlign: 'center', mb: 30 }}>
-        <Typography variant="h3">&#127345;️lanner</Typography>
+        <Typography variant="h2">&#127345;️lanner</Typography>
         <Box mt={5}>
           <Typography variant="h6">Select CS Tracks</Typography>
           <Box mt={1}>
@@ -123,7 +127,7 @@ function Home() {
           </Box>
         </Box>
         <Box mt={6}>
-          <Typography variant="h6">Previous/Current Courses</Typography>
+          <Typography variant="h6">Enter Previous/Current Courses</Typography>
           <Stack alignItems="center">
             <Autocomplete
               disablePortal
@@ -152,7 +156,7 @@ function Home() {
                 <TextField
                   {...params}
                   autoComplete="off"
-                  label="Enter previous/current courses"
+                  label="Course Name/Number"
                   variant="standard"
                 />
               )}

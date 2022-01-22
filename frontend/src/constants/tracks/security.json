@@ -1,4 +1,4 @@
-const SECURITY = JSON.parse(`{
+{
     "title": "Security Track",
     "type": "and",
     "value": [
@@ -202,6 +202,4 @@ const SECURITY = JSON.parse(`{
             ]
         }
     ]
-}`)
-
-export default SECURITY
+}

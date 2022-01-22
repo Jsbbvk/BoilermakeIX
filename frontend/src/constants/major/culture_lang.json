@@ -1,10 +1,12 @@
-const CULTURE_LANG = JSON.parse(`{
+{
     "title": "Cultural Diversity (Language & Culture)",
+    "size": "large",
     "type": "or",
     "value": [
         {
             "title": "3 Language",
-            "type": "choose 3",
+            "type": "or",
+            "pick": 3,
             "value": [
                 {
                     "type": "course",
@@ -391,7 +393,8 @@ const CULTURE_LANG = JSON.parse(`{
             "type": "and",
             "value": [
                 {
-                    "type": "choose 2",
+                    "type": "or",
+                    "pick": 2,
                     "value": [
                         {
                             "type": "course",
@@ -7406,7 +7409,8 @@ const CULTURE_LANG = JSON.parse(`{
         },
         {
             "title": "3 Culture",
-            "type": "choose 3",
+            "type": "or",
+            "pick": 3,
             "value": [
                 {
                     "type": "course",
@@ -14036,6 +14040,3 @@ const CULTURE_LANG = JSON.parse(`{
         }
     ]
 }
-`)
-
-export default CULTURE_LANG

@@ -1,6 +1,6 @@
-const LABSCI = JSON.parse(`
 {
     "title": "Laboratory Science",
+    "size": "large",
     "type": "or",
     "value": [
         {
@@ -394,6 +394,4 @@ const LABSCI = JSON.parse(`
             ]
         }
     ]
-}`)
-
-export default LABSCI
+}

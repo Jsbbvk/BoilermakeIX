@@ -1,4 +1,4 @@
-const CSE = JSON.parse(`{
+{
     "title": "Computational Science and Engineering Track",
     "type": "and",
     "value": [
@@ -248,6 +248,4 @@ const CSE = JSON.parse(`{
             ]
         }
     ]
-}`)
-
-export default CSE
+}

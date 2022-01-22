@@ -1,4 +1,4 @@
-const SWE = JSON.parse(`{
+{
     "title": "Software Engineering Track",
     "type": "and",
     "value": [
@@ -201,6 +201,3 @@ const SWE = JSON.parse(`{
         }
     ]
 }
-`)
-
-export default SWE

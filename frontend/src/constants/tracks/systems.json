@@ -1,4 +1,3 @@
-const SYSTEMS = JSON.parse(`
 {
     "title": "Systems Software Track",
     "type": "and",
@@ -125,6 +124,3 @@ const SYSTEMS = JSON.parse(`
         }
     ]
 }
-`)
-
-export default SYSTEMS

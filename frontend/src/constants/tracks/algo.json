@@ -1,4 +1,4 @@
-const ALGO = JSON.parse(`{
+{
     "title": "Algorithmic Foundations Track",
     "type": "and",
     "value": [
@@ -202,6 +202,3 @@ const ALGO = JSON.parse(`{
         }
     ]
 }
-`)
-
-export default ALGO

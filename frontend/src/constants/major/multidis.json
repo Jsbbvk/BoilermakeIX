@@ -1,7 +1,7 @@
-const MULTIDIS = JSON.parse(`
 {
     "title": "Multidisciplinary Experience",
     "type": "or",
+    "size": "large",
     "value": [
         {
             "type": "course",
@@ -1048,6 +1048,4 @@ const MULTIDIS = JSON.parse(`
             }
         }
     ]
-}`)
-
-export default MULTIDIS
+}

@@ -1,6 +1,8 @@
-const GEN_ED = JSON.parse(`{
+{
     "title": "General Education",
-    "type": "pick 3",
+    "size": "large",
+    "type": "or",
+    "pick": 3,
     "value": [
         {
             "type": "course",
@@ -6628,6 +6630,3 @@ const GEN_ED = JSON.parse(`{
         }
     ]
 }
-`)
-
-export default GEN_ED

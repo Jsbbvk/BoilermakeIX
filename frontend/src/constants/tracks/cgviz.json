@@ -1,4 +1,4 @@
-const CGVIZ = JSON.parse(`{
+{
     "title": "Database and Information Systems Track",
     "type": "and",
     "value": [
@@ -56,6 +56,4 @@ const CGVIZ = JSON.parse(`{
             ]
         }
     ]
-}`)
-
-export default CGVIZ
+}
