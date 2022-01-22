@@ -10,6 +10,8 @@ import {
   InputLabel,
   InputAdornment,
   IconButton,
+  Autocomplete,
+  Stack,
 } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import { useState } from 'react'
@@ -65,29 +67,23 @@ function EnterInfo() {
             ))}
           </Box>
         </Box>
-        <Box mt={7}>
-          <FormControl sx={{ width: '300px', maxWidth: '90vw' }} variant="standard">
-            <InputLabel htmlFor="search-course-field">Enter previous courses</InputLabel>
-            <Input
-              id="search-course-field"
-              onChange={onSearchChange}
-              value={query}
-              autoComplete="off"
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="Clear search field"
-                    onClick={() => setQuery('')}
-                    edge="end"
-                    disableRipple
-                  >
-                    <CloseIcon />
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-        </Box>
+        <Stack sx={{ mt: 5 }} alignItems="center">
+          <Autocomplete
+            disablePortal
+            options={TRACKS}
+            sx={{ width: '400px', maxWidth: '90vw' }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                onChange={onSearchChange}
+                value={query}
+                autoComplete="off"
+                label="Enter previous courses"
+                variant="standard"
+              />
+            )}
+          />
+        </Stack>
       </Box>
     </Container>
   )
