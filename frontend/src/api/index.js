@@ -1,1 +1,1 @@
-export { getCourse, checkPrereqs } from './course'
+export { getCourse } from './course'
