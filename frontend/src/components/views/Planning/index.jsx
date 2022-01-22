@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import {
   Box,
   Typography,
@@ -7,6 +8,8 @@ import {
   Container,
   styled,
   Chip,
+  Stack,
+  LinearProgress,
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useSelector, useDispatch } from 'react-redux'
@@ -48,10 +51,9 @@ const COLORS = [
   '#33691e',
 ]
 
-const DegreeProgress = createContext({
+export const DegreeProgressContext = createContext({
   setCurriculumProgress: () => {},
 })
-export const useDegreeProgress = () => useContext(DegreeProgress)
 
 const Planning = memo(() => {
   const { previousCourses } = useSelector((state) => state.course)
@@ -62,12 +64,16 @@ const Planning = memo(() => {
       setProgress: (curriculum, percentage) => {
         setCurriculumProgress((prev) => ({
           ...prev,
-          curriculum: Math.min(100, prev[curriculum] + percentage),
+          [curriculum]: Math.min(100, (prev[curriculum] || 0) + percentage),
         }))
       },
     }),
     []
   )
+
+  useEffect(() => {
+    console.log(curriculumProgress)
+  }, [curriculumProgress])
 
   const colorMap = useMemo(() => new Map(), [])
 
@@ -143,7 +149,7 @@ const Planning = memo(() => {
   )
 
   return (
-    <DegreeProgress.Provider value={degreeProgress}>
+    <DegreeProgressContext.Provider value={degreeProgress}>
       <Box>
         <Typography variant="h3" sx={{ textAlign: 'center' }}>
           Degree Plan
@@ -172,7 +178,30 @@ const Planning = memo(() => {
                     }}
                   >
                     <Box>
-                      <Typography variant="h6">{curriculum.title}</Typography>
+                      <Stack direction="row" alignItems="center" spacing={2}>
+                        <Typography variant="h6">{curriculum.title}</Typography>
+                        <Box
+                          sx={{
+                            width: '75px',
+                            color: () => {
+                              const percent = Math.round(
+                                curriculumProgress[curriculum.title] / curriculum.value.length
+                              )
+                              if (percent < 50) return '#d32f2f'
+                              if (percent < 100) return '#fbc02d'
+                              return '#66bb6a'
+                            },
+                          }}
+                        >
+                          <LinearProgress
+                            variant="determinate"
+                            value={Math.round(
+                              curriculumProgress[curriculum.title] / curriculum.value.length
+                            )}
+                            color="inherit"
+                          />
+                        </Box>
+                      </Stack>
                       <Box>{getBadges(curriculum, previousCourses)}</Box>
                     </Box>
                   </AccordionSummary>
@@ -185,7 +214,7 @@ const Planning = memo(() => {
           </StyledAccordion>
         </Box>
       </Box>
-    </DegreeProgress.Provider>
+    </DegreeProgressContext.Provider>
   )
 })
 

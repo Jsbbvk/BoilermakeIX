@@ -13,8 +13,10 @@ import {
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { connect } from 'react-redux'
-import { memo, useMemo } from 'react'
+import { memo, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { getPercentageOfCompletion, coursesInList } from '../../../../utilities'
+// eslint-disable-next-line import/no-cycle
+import { DegreeProgressContext } from '..'
 
 const StyledChip = styled(Chip)({
   margin: 6,
@@ -24,7 +26,7 @@ const StyledChip = styled(Chip)({
 
 const HSL_FACTOR = 5
 
-const Course = memo(({ depth = 1, type, pick = 1, value, displayType, title }) => {
+const Course = memo(({ depth = 1, type, pick = 1, value, displayType, title, curriculum }) => {
   if (depth > 4) {
     return null
   }
@@ -57,7 +59,13 @@ const Course = memo(({ depth = 1, type, pick = 1, value, displayType, title }) =
               </span>
             )}
           </Typography>
-          {depth !== 1 && title && <PercentageDisplay value={{ type, value }} />}
+          {depth !== 1 && title && (
+            <PercentageDisplay
+              value={{ type, value, pick }}
+              depth={depth}
+              curriculum={curriculum}
+            />
+          )}
         </Stack>
       </AccordionSummary>
       <AccordionDetails>
@@ -81,6 +89,7 @@ const Course = memo(({ depth = 1, type, pick = 1, value, displayType, title }) =
                 pick={_pick}
                 title={_title}
                 displayType={i === 0 ? undefined : type}
+                curriculum={depth === 1 ? title : curriculum}
               />
             )
           }
@@ -98,25 +107,32 @@ const mapStateToProps = (state) => ({
 
 const PercentageDisplay = connect(mapStateToProps)(
   memo(
-    ({ previousCourses, value }) => {
-      const pValue = useMemo(
-        () => getPercentageOfCompletion(value, previousCourses, 100),
-        [value, previousCourses]
-      )
+    ({ previousCourses, value, depth, curriculum }) => {
+      const { setProgress } = useContext(DegreeProgressContext)
+      const [percent, setPercent] = useState(0)
+      const getPercentage = useCallback((v, p) => getPercentageOfCompletion(v, p, 100), [])
 
-      console.log('rerendering')
+      useEffect(() => {
+        const pValue = getPercentage(value, previousCourses)
+        console.log(curriculum, pValue)
+        setPercent(pValue)
+        if (depth === 2) {
+          setProgress(curriculum, pValue)
+        }
+      }, [value, previousCourses, depth, getPercentage, setProgress, curriculum])
+
       return (
         <Box
           sx={{
             width: '75px',
             color: () => {
-              if (pValue < 50) return '#d32f2f'
-              if (pValue < 100) return '#fbc02d'
+              if (percent < 50) return '#d32f2f'
+              if (percent < 100) return '#fbc02d'
               return '#66bb6a'
             },
           }}
         >
-          <LinearProgress variant="determinate" value={pValue} color="inherit" />
+          <LinearProgress variant="determinate" value={percent} color="inherit" />
         </Box>
       )
     },

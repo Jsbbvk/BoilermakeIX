@@ -31,12 +31,13 @@ export const coursesInList = ({ type, value }, list) => {
   if (type === 'course') return list.find((c) => courseEquals(c, value)) ? [value] : []
 }
 
-export const getPercentageOfCompletion = ({ type, value }, list, percentage) => {
-  if (list.length === 0) return percentage
-  console.log('percentage')
+export const getPercentageOfCompletion = ({ type, value, pick = 1 }, list, percentage) => {
+  if (list.length === 0) return 0
+  // console.log('percentage')
   if (type === 'course') return list.find((c) => courseEquals(c, value)) ? percentage : 0
 
-  const singlePercentage = type === 'and' ? Math.round(percentage / value.length) : percentage
+  const singlePercentage =
+    type === 'and' ? Math.round(percentage / value.length) : Math.round(percentage / pick)
 
   return Math.min(
     percentage,
