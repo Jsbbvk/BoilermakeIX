@@ -29,7 +29,12 @@ for folder in folders:
 		print (file)
 		rec(data)
 
+# x = list(courses.values())
 x = list(courses.keys())
+x.sort()
+y = []
+for i in x:
+	y.append(courses[i])
 
 with open("allcourses.json", "w") as file:
-	file.write(json.dumps(x, indent=4))
+	file.write(json.dumps(y, indent=4))

@@ -1,5 +1,7 @@
-import { CssBaseline } from '@mui/material'
+import { Button, CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { useEffect } from 'react'
+import { getcourse } from './api/course'
 import EnterInfo from './components/views/EnterInfo'
 
 const theme = createTheme({
@@ -16,10 +18,21 @@ const theme = createTheme({
 })
 
 function App() {
+  useEffect(() => {
+    getcourse('CS', '18000')
+  }, [])
+
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <EnterInfo />
+      <Button
+        onClick={() => {
+          console.log('nice')
+        }}
+      >
+        Click me
+      </Button>
+      {/* <CssBaseline />
+      <EnterInfo /> */}
     </ThemeProvider>
   )
 }

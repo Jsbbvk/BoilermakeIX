@@ -32,7 +32,7 @@ for element in elements:
 
 gen_eds = {
     "title": "General Education",
-    "type": "choose 3",
+    "type": "pick 3",
     "value": gen_eds
 }
 
