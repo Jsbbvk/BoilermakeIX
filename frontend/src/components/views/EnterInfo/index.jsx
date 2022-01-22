@@ -11,21 +11,43 @@ import {
   InputAdornment,
   IconButton,
   Autocomplete,
+  Button,
   Stack,
+  Fade,
 } from '@mui/material'
-import CloseIcon from '@mui/icons-material/Close'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import Planning from '../Planning'
 
 const StyledChip = styled(Chip, {
-  shouldForwardProp: (prop) => prop !== 'selected',
-})(({ selected }) => ({
+  shouldForwardProp: (prop) => prop !== 'selected' && prop !== 'disableHover',
+})(({ selected, disableHover }) => ({
   margin: 6,
   cursor: 'pointer',
-  backgroundColor: selected ? '#8eff98' : '#00000014',
-  '&:hover': {
-    backgroundColor: selected ? '#8eff98' : '#0000001f',
-  },
+  backgroundColor: selected ? '#dba857d6' : '#dba8574f',
+  ...(!disableHover && {
+    '&:hover': {
+      backgroundColor: selected ? '#dba857d6' : '#dba857d6',
+    },
+  }),
 }))
+
+const StyledButton = styled(Button)({
+  backgroundColor: '#dba857d6',
+  color: '#fff',
+  textTransform: 'none',
+  borderRadius: 40,
+  padding: '18px 28px',
+  fontSize: '1.5rem',
+  transition: 'transform 250ms ease',
+
+  '&:hover': {
+    backgroundColor: '#dba857f4',
+  },
+
+  '&:active': {
+    transform: 'scale(0.94)',
+  },
+})
 
 const TRACKS = [
   'Computational Science and Engineering Track',
@@ -41,22 +63,36 @@ const TRACKS = [
 
 function EnterInfo() {
   const [selectedTracks, setSelectedTracks] = useState([])
-  const [query, setQuery] = useState('')
+  const [selectedCourses, setSelectedCourses] = useState([])
+  const [courseValue, setCourseValue] = useState(null)
+  const [courseInputValue, setCourseInputValue] = useState('')
 
-  const onSearchChange = (e) => setQuery(e.target.value || '')
+  const [showPlanning, setShowPlanning] = useState(false)
+
   const onTrackSelect = (track) => {
     setSelectedTracks((p) =>
       p.find((t) => t === track) ? p.filter((t) => t !== track) : [...p, track]
     )
   }
 
+  const onCourseChange = (_, course, details) => {
+    if (details !== 'selectOption') return
+    setCourseInputValue('')
+    setCourseValue(null)
+    setSelectedCourses((p) => [...p, course])
+  }
+
+  const onCourseDelete = (course) => {
+    setSelectedCourses((p) => p.filter((c) => c !== course))
+  }
+
   return (
-    <Container>
-      <Box sx={{ textAlign: 'center', mt: 5 }}>
-        <Typography variant="h3">Purdue Planner</Typography>
+    <Container sx={{ py: 7 }}>
+      <Box sx={{ textAlign: 'center' }}>
+        <Typography variant="h3">&#127345;️lanner</Typography>
         <Box mt={5}>
           <Typography variant="h6">Select CS Tracks</Typography>
-          <Box>
+          <Box mt={1}>
             {TRACKS.map((track) => (
               <StyledChip
                 key={track}
@@ -67,24 +103,52 @@ function EnterInfo() {
             ))}
           </Box>
         </Box>
-        <Stack sx={{ mt: 5 }} alignItems="center">
-          <Autocomplete
-            disablePortal
-            options={TRACKS}
-            sx={{ width: '400px', maxWidth: '90vw' }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                onChange={onSearchChange}
-                value={query}
-                autoComplete="off"
-                label="Enter previous courses"
-                variant="standard"
-              />
-            )}
-          />
-        </Stack>
+        <Box mt={6}>
+          <Typography variant="h6">Previous Courses</Typography>
+          <Stack alignItems="center">
+            <Autocomplete
+              disablePortal
+              blurOnSelect
+              value={courseValue}
+              inputValue={courseInputValue}
+              onInputChange={(_, course) => setCourseInputValue(course || '')}
+              options={TRACKS.filter((course) => !selectedCourses.includes(course))}
+              onChange={onCourseChange}
+              sx={{ width: '400px', maxWidth: '90vw' }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  autoComplete="off"
+                  label="Enter previous courses"
+                  variant="standard"
+                />
+              )}
+            />
+          </Stack>
+          {Boolean(selectedCourses?.length) && (
+            <Box mt={3}>
+              {/* TODO cool transition */}
+              {selectedCourses.map((course) => (
+                <StyledChip
+                  key={course}
+                  label={course}
+                  onDelete={() => onCourseDelete(course)}
+                  disableHover
+                  sx={{ backgroundColor: '#dba857d6' }}
+                />
+              ))}
+            </Box>
+          )}
+        </Box>
+        <Box mt={26}>
+          <StyledButton onClick={() => setShowPlanning(true)}>Start Planning!</StyledButton>
+        </Box>
       </Box>
+      <Fade in={showPlanning} unmountOnExit>
+        <Box>
+          <Planning />
+        </Box>
+      </Fade>
     </Container>
   )
 }

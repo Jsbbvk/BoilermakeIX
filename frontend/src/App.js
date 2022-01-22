@@ -13,6 +13,9 @@ const theme = createTheme({
       },
     },
   },
+  palette: {
+    mode: 'dark',
+  },
 })
 
 function App() {
