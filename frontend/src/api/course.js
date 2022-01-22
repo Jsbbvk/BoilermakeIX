@@ -1,5 +1,4 @@
 export const getcourse = async (subject, number) => {
-  // const res = await fetch(`http://localhost:8000/api/getcourse?subject=${subject}&number=${number}`)
   const res = await fetch(
     `http://blanner-api.herokuapp.com/api/getcourse?subject=${subject}&number=${number}`,
     {
