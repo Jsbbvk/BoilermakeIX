@@ -12,6 +12,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useSelector, useDispatch } from 'react-redux'
 import Course from './Course'
 import UCORE from '../../../constants/ucore'
+import MAJOR from '../../../constants/major'
 import CourseModal from './CourseModal'
 
 const StyledAccordion = styled(Accordion)({
@@ -30,6 +31,7 @@ function Planning() {
         Degree Plan
       </Typography>
       <Box mt={4}>
+        {/* TODO and help section explaining logic */}
         <StyledAccordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -41,6 +43,37 @@ function Planning() {
           </AccordionSummary>
           <AccordionDetails>
             {Object.values(UCORE).map((curriculum) => (
+              <Accordion key={curriculum.title}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  sx={{
+                    alignItems: 'center',
+                  }}
+                >
+                  <Typography variant="h6">{curriculum.title}</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  {curriculum.size === 'large' ? (
+                    <CourseModal curriculum={curriculum} />
+                  ) : (
+                    <Course {...curriculum} />
+                  )}
+                </AccordionDetails>
+              </Accordion>
+            ))}
+          </AccordionDetails>
+        </StyledAccordion>
+        <StyledAccordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            sx={{
+              alignItems: 'center',
+            }}
+          >
+            <Typography variant="h6">Major Requirements</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            {Object.values(MAJOR).map((curriculum) => (
               <Accordion key={curriculum.title}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}

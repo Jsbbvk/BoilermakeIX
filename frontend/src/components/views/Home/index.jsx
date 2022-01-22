@@ -108,7 +108,7 @@ function Home() {
   return (
     <Container sx={{ py: 7 }}>
       <Box sx={{ textAlign: 'center', mb: 30 }}>
-        <Typography variant="h3">&#127345;️lanner</Typography>
+        <Typography variant="h2">&#127345;️lanner</Typography>
         <Box mt={5}>
           <Typography variant="h6">Select CS Tracks</Typography>
           <Box mt={1}>
@@ -123,7 +123,7 @@ function Home() {
           </Box>
         </Box>
         <Box mt={6}>
-          <Typography variant="h6">Previous/Current Courses</Typography>
+          <Typography variant="h6">Enter Previous/Current Courses</Typography>
           <Stack alignItems="center">
             <Autocomplete
               disablePortal
@@ -152,7 +152,7 @@ function Home() {
                 <TextField
                   {...params}
                   autoComplete="off"
-                  label="Enter previous/current courses"
+                  label="Course Name/Number"
                   variant="standard"
                 />
               )}

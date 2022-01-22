@@ -17,30 +17,30 @@ const StyledButton = styled(Button)({
 // eslint-disable-next-line react/display-name
 const Transition = forwardRef((props, ref) => <Fade ref={ref} {...props} />)
 
+const scrollStyles = {
+  '&::-webkit-scrollbar': {
+    width: 5,
+  },
+
+  '&::-webkit-scrollbar-track': {
+    background: '#f1f1f1',
+  },
+
+  '&::-webkit-scrollbar-thumb': {
+    background: '#adadad',
+  },
+
+  '&::-webkit-scrollbar-thumb:hover': {
+    background: '#919191',
+  },
+
+  '& > div:nth-of-type(even)': {
+    backgroundColor: '#f0f0f0',
+  },
+}
+
 function CourseModal({ curriculum }) {
   const [open, setOpen] = useState(false)
-
-  const scrollStyles = {
-    '&::-webkit-scrollbar': {
-      width: 5,
-    },
-
-    '&::-webkit-scrollbar-track': {
-      background: '#f1f1f1',
-    },
-
-    '&::-webkit-scrollbar-thumb': {
-      background: '#adadad',
-    },
-
-    '&::-webkit-scrollbar-thumb:hover': {
-      background: '#919191',
-    },
-
-    '& > div:nth-of-type(even)': {
-      backgroundColor: '#f0f0f0',
-    },
-  }
 
   return (
     <Stack alignItems={{ xs: 'center', md: 'flex-start' }} px={3}>
