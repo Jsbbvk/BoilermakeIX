@@ -1,0 +1,14 @@
+certifi==2021.10.8
+cffi==1.15.0
+charset-normalizer==2.0.10
+cryptography==36.0.1
+cssselect==1.1.0
+idna==3.3
+lxml==4.7.1
+ndg-httpsclient==0.5.1
+pyasn1==0.4.8
+pycparser==2.21
+pyOpenSSL==21.0.0
+requests==2.27.1
+six==1.16.0
+urllib3==1.26.8
