@@ -66,7 +66,7 @@ const TRACKS = [
 
 const COURSE_NAMES = COURSES.map((course) => `${course.course_id}: ${course.title}`)
 
-function EnterInfo() {
+function Home() {
   const dispatch = useDispatch()
 
   const [selectedTracks, setSelectedTracks] = useState([])
@@ -188,4 +188,4 @@ function EnterInfo() {
   )
 }
 
-export default EnterInfo
+export default Home

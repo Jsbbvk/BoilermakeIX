@@ -4,18 +4,19 @@ const StyledChip = styled(Chip)({
   margin: 6,
 })
 
-function Course({ depth = 1, type, pick, value }) {
+function Course({ depth = 1, type, pick = 1, value, displayType }) {
   if (depth > 3) return null
   return (
     <Box
-      p={2}
+      p={1.5}
       sx={{
-        backgroundColor: `hsla(0 0% 7% ${1 - 0.05 * depth})`,
+        backgroundColor: `hsla(0, 0%, ${7 + depth * 4}%, 1)`,
+        mt: depth > 1 ? 1 : 0,
       }}
     >
       <Typography>
-        <b>{type.toUpperCase()}</b> pick {type === 'and' ? 'all' : pick}{' '}
-        {`class${type === 'and' || pick > 1 ? 'es' : ''}`} from
+        <b>{displayType?.toUpperCase()}</b> {displayType ? 'p' : 'P'}ick{' '}
+        {type === 'and' ? 'all' : pick} {`class${type === 'and' || pick > 1 ? 'es' : ''}`} from
       </Typography>
       {value.map(({ type: _type, value: _value, pick: _pick }) => {
         if (_type === 'course') {
@@ -29,6 +30,7 @@ function Course({ depth = 1, type, pick, value }) {
               type={_type}
               value={_value}
               pick={_pick}
+              displayType={type}
             />
           )
         }

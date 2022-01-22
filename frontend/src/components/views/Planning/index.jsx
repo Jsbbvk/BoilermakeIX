@@ -44,6 +44,28 @@ const temp = {
           type: 'course',
           value: 'CS 25000: Compilers: Principles And Practice',
         },
+        {
+          type: 'or',
+          pick: 2,
+          value: [
+            {
+              type: 'course',
+              value: 'AMST 10100: America and the World',
+            },
+            {
+              type: 'course',
+              value: 'CS 25000: Compilers: Principles And Practice',
+            },
+            {
+              type: 'course',
+              value: 'AMST 10100: America and the World',
+            },
+            {
+              type: 'course',
+              value: 'CS 25000: Compilers: Principles And Practice',
+            },
+          ],
+        },
       ],
     },
   ],
@@ -77,9 +99,6 @@ function Planning() {
                 <Typography variant="h6">Written Communication</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                {/* {[...new Array(10).keys()].map((i) => (
-                  <StyledChip key={i} label="AMST 10100: America and the World" />
-                ))} */}
                 <Course {...temp} />
               </AccordionDetails>
             </Accordion>
