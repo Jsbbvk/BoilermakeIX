@@ -18,7 +18,7 @@ import {
 import { useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Planning from '../Planning'
-import { setCourses } from '../../../store'
+import { addCourse, removeCourse } from '../../../store'
 import COURSES from '../../../constants/allcourses.json'
 
 const StyledChip = styled(Chip, {
@@ -84,6 +84,12 @@ function Home() {
 
   const onCourseChange = (_, course, details) => {
     if (details !== 'selectOption') return
+    dispatch(
+      addCourse({
+        subject: course.split(' ')[0],
+        number: parseInt(course.split(' ')[1].slice(0, -1)),
+      })
+    )
     setCourseInputValue('')
     setCourseValue(null)
     setSelectedCourses((p) => [...p, course])
@@ -91,17 +97,15 @@ function Home() {
 
   const onCourseDelete = (course) => {
     setSelectedCourses((p) => p.filter((c) => c !== course))
+    dispatch(
+      removeCourse({
+        subject: course.split(' ')[0],
+        number: parseInt(course.split(' ')[1].slice(0, -1)),
+      })
+    )
   }
 
   const onStartPlanning = () => {
-    dispatch(
-      setCourses(
-        selectedCourses.map((course) => ({
-          subject: course.split(' ')[0],
-          number: parseInt(course.split(' ')[1].slice(0, -1)),
-        }))
-      )
-    )
     setShowPlanning(true)
   }
 

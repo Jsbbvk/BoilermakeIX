@@ -10,6 +10,8 @@ import {
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useSelector } from 'react-redux'
+import { memo, useEffect } from 'react'
+import { courseExist } from '../../../../utilities'
 
 const StyledChip = styled(Chip)({
   margin: 6,
@@ -19,13 +21,19 @@ const StyledChip = styled(Chip)({
 
 const HSL_FACTOR = 5
 
-function Course({ depth = 1, type, pick = 1, value, displayType, title }) {
+const Course = memo(({ depth = 1, type, pick = 1, value, displayType, title }) => {
   const { previousCourses } = useSelector((state) => state.course)
+
+  const findCourse = ({ subject, number }) =>
+    previousCourses.some(
+      ({ subject: _subject, number: _number }) => subject === _subject && number === _number
+    )
 
   if (depth > 4) {
     console.log('max depth reached')
     return null
   }
+
   return (
     <Accordion
       p={1.5}
@@ -49,14 +57,19 @@ function Course({ depth = 1, type, pick = 1, value, displayType, title }) {
       <AccordionDetails>
         {value.map(({ type: _type, value: _value, pick: _pick, title: _title }, i) => {
           if (_type === 'course') {
+            const foundCourse = findCourse(_value)
             return (
               <StyledChip
                 key={`${depth}-${_value.subject}-${_value.number}-${uuidv4()}`}
                 label={`${_value.subject} ${_value.number}: ${_value.title}`}
                 sx={{
-                  backgroundColor: `hsla(0, 0%, ${7 + (depth - 0.75) * HSL_FACTOR}%, 1)`,
+                  backgroundColor: foundCourse
+                    ? '#2e7d32'
+                    : `hsla(0, 0%, ${7.5 + depth * HSL_FACTOR}%, 1)`,
                   '&:hover': {
-                    backgroundColor: `hsla(0, 0%, ${7 + depth * HSL_FACTOR}%, 1)`,
+                    backgroundColor: foundCourse
+                      ? '#388e3c'
+                      : `hsla(0, 0%, ${3 + depth * HSL_FACTOR}%, 1)`,
                   },
                 }}
               />
@@ -81,6 +94,6 @@ function Course({ depth = 1, type, pick = 1, value, displayType, title }) {
       </AccordionDetails>
     </Accordion>
   )
-}
+})
 
 export default Course
