@@ -1,0 +1,334 @@
+{
+    "title": "Composition & Presentation",
+    "type": "and",
+    "value": [
+        {
+            "title": "First-Year Composition",
+            "type": "or",
+            "value": [
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "AMST",
+                        "number": 10100,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=AMST&crse_numb_in=10100",
+                        "title": "America And The World"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "COM",
+                        "number": 20400,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=COM&crse_numb_in=20400",
+                        "title": "Critical Perspectives On Communication"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "EDCI",
+                        "number": 20500,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=EDCI&crse_numb_in=20500",
+                        "title": "Exploring Teaching As A Career"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "ENGL",
+                        "number": 10600,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=ENGL&crse_numb_in=10600",
+                        "title": "First-Year Composition"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "ENGL",
+                        "number": 10800,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=ENGL&crse_numb_in=10800",
+                        "title": "Accelerated First-Year Composition"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "HONR",
+                        "number": 19903,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=HONR&crse_numb_in=19903",
+                        "title": "Interdisciplinary Approaches In Writing"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "PHIL",
+                        "number": 26000,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=PHIL&crse_numb_in=26000",
+                        "title": "Philosophy And Law"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "SCLA",
+                        "number": 10100,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=SCLA&crse_numb_in=10100",
+                        "title": "Transformative Texts, Critical Thinking And Communication I: Antiquity To Modernity"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Technical Writing And Presentation",
+            "type": "or",
+            "value": [
+                {
+                    "type": "or",
+                    "value": [
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "COM",
+                                "number": 21700,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=COM&crse_numb_in=21700",
+                                "title": "Science Writing And Presentation"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "CHM",
+                                "number": 46200,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CHM&crse_numb_in=46200",
+                                "title": "Intermediate Organic Chemistry"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "choose 2",
+                    "value": [
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "BIOL",
+                                "number": 44100,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=BIOL&crse_numb_in=44100",
+                                "title": "Biology Senior Seminar In Genetics"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "COM",
+                                "number": 11400,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=COM&crse_numb_in=11400",
+                                "title": "Fundamentals Of Speech Communication"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "COM",
+                                "number": 31400,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=COM&crse_numb_in=31400",
+                                "title": "Advanced Presentational Speaking"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "COM",
+                                "number": 31500,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=COM&crse_numb_in=31500",
+                                "title": "Speech Communication Of Technical Information"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "COM",
+                                "number": 32400,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=COM&crse_numb_in=32400",
+                                "title": "Introduction To Organizational Communication"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "COM",
+                                "number": 41500,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=COM&crse_numb_in=41500",
+                                "title": "Discussion Of Technical Problems"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "SCLA",
+                                "number": 10200,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=SCLA&crse_numb_in=10200",
+                                "title": "Transformative Texts, Critical Thinking And Communication II: Modern World"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "BIOL",
+                                "number": 44100,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=BIOL&crse_numb_in=44100",
+                                "title": "Biology Senior Seminar In Genetics"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "COM",
+                                "number": 11400,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=COM&crse_numb_in=11400",
+                                "title": "Fundamentals Of Speech Communication"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "COM",
+                                "number": 31400,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=COM&crse_numb_in=31400",
+                                "title": "Advanced Presentational Speaking"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "COM",
+                                "number": 31500,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=COM&crse_numb_in=31500",
+                                "title": "Speech Communication Of Technical Information"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "COM",
+                                "number": 32400,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=COM&crse_numb_in=32400",
+                                "title": "Introduction To Organizational Communication"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "COM",
+                                "number": 41500,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=COM&crse_numb_in=41500",
+                                "title": "Discussion Of Technical Problems"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "SCLA",
+                                "number": 10200,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=SCLA&crse_numb_in=10200",
+                                "title": "Transformative Texts, Critical Thinking And Communication II: Modern World"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "ENGL",
+                                "number": 30400,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=ENGL&crse_numb_in=30400",
+                                "title": "Advanced Composition"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "ENGL",
+                                "number": 30900,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=ENGL&crse_numb_in=30900",
+                                "title": "Digital Design And Production"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "ENGL",
+                                "number": 41900,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=ENGL&crse_numb_in=41900",
+                                "title": "Multimedia Writing"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "ENGL",
+                                "number": 42000,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=ENGL&crse_numb_in=42000",
+                                "title": "Business Writing"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "ENGL",
+                                "number": 42100,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=ENGL&crse_numb_in=42100",
+                                "title": "Technical Writing"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "ENGL",
+                                "number": 42201,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=ENGL&crse_numb_in=42201",
+                                "title": "Writing For The Health And Human Sciences"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "ENGL",
+                                "number": 42400,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=ENGL&crse_numb_in=42400",
+                                "title": "Writing For High Technology Industries"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "ENGL",
+                                "number": 43400,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=ENGL&crse_numb_in=43400",
+                                "title": "Science And Medical Writing"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "ENGL",
+                                "number": 49000,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=ENGL&crse_numb_in=49000",
+                                "title": "Worksite Internship Practicum"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "MGMT",
+                                "number": 39000,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=MGMT&crse_numb_in=39000",
+                                "title": "Junior Level Problems In Management (Strategic Decision Making - Honors)"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

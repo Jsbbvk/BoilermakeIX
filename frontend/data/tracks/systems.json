@@ -1,0 +1,54 @@
+{
+    "title": "Systems Software Track",
+    "type": "and",
+    "value": [
+        {
+            "title": "Required",
+            "type": "and",
+            "value": [
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CS",
+                        "number": 35200,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=35200",
+                        "title": "Compilers: Principles And Practice"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CS",
+                        "number": 35400,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=35400",
+                        "title": "Operating Systems"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CS",
+                        "number": 42200,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=42200",
+                        "title": "Computer Networks"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Electives",
+            "type": "choose 3",
+            "value": [
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CS",
+                        "number": 30700,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=30700",
+                        "title": "Software Engineering ICS 33400 - Fundamentals Of Computer GraphicsCS 35300 - Principles Of Concurrency And ParallelismCS 38100 - Introduction To The Analysis Of AlgorithmsCS 42600 - Computer SecurityCS 44800 - Introduction To Relational Database SystemsCS 45600 - Programming LanguagesCS 48900 - Embedded SystemsCS 49000 - Topics In Computer Sciences For Undergraduates"
+                    }
+                }
+            ]
+        }
+    ]
+}

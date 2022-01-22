@@ -1,0 +1,396 @@
+{
+    "title": "Laboratory Science",
+    "type": "or",
+    "value": [
+        {
+            "title": "Biology Sequence 1",
+            "type": "and",
+            "value": [
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "BIOL",
+                        "number": 11000,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=BIOL&crse_numb_in=11000",
+                        "title": "Fundamentals Of Biology I"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "BIOL",
+                        "number": 11100,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=BIOL&crse_numb_in=11100",
+                        "title": "Fundamentals Of Biology II"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Biology Sequence 2",
+            "type": "and",
+            "value": [
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "BIOL",
+                        "number": 12100,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=BIOL&crse_numb_in=12100",
+                        "title": "Biology I: Diversity, Ecology, And Behavior"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "BIOL",
+                        "number": 13100,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=BIOL&crse_numb_in=13100",
+                        "title": "Biology II: Development, Structure, And Function Of Organisms"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "BIOL",
+                        "number": 13500,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=BIOL&crse_numb_in=13500",
+                        "title": "First Year Biology Laboratory"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Chemistry Sequence 1",
+            "type": "and",
+            "value": [
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CHM",
+                        "number": 11500,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CHM&crse_numb_in=11500",
+                        "title": "General Chemistry"
+                    }
+                },
+                {
+                    "type": "or",
+                    "value": [
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "CHM",
+                                "number": 11600,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CHM&crse_numb_in=11600",
+                                "title": "General Chemistry"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "CHM",
+                                "number": 12901,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CHM&crse_numb_in=12901",
+                                "title": "General Chemistry With A Biological Focus"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Chemistry Sequence 2",
+            "type": "and",
+            "value": [
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CHM",
+                        "number": 12500,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CHM&crse_numb_in=12500",
+                        "title": "Introduction To Chemistry I"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CHM",
+                        "number": 12600,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CHM&crse_numb_in=12600",
+                        "title": "Introduction To Chemistry II"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Chemistry Sequence 3",
+            "type": "and",
+            "value": [
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CHM",
+                        "number": 25500,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CHM&crse_numb_in=25500",
+                        "title": "Organic Chemistry"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CHM",
+                        "number": 25501,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CHM&crse_numb_in=25501",
+                        "title": "Organic Chemistry Laboratory"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CHM",
+                        "number": 25600,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CHM&crse_numb_in=25600",
+                        "title": "Organic Chemistry"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CHM",
+                        "number": 25601,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CHM&crse_numb_in=25601",
+                        "title": "Organic Chemistry Laboratory"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Chemistry Sequence 4",
+            "type": "and",
+            "value": [
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CHM",
+                        "number": 26505,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CHM&crse_numb_in=26505",
+                        "title": "Organic Chemistry"
+                    }
+                },
+                {
+                    "type": "or",
+                    "value": [
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "CHM",
+                                "number": 26300,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CHM&crse_numb_in=26300",
+                                "title": "Organic Chemistry Laboratory"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "CHM",
+                                "number": 26500,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CHM&crse_numb_in=26500",
+                                "title": "Organic Chemistry Laboratory"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "CHM",
+                                "number": 26700,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CHM&crse_numb_in=26700",
+                                "title": "Organic Chemistry Laboratory Honors"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Chemistry Sequence 5",
+            "type": "and",
+            "value": [
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "CHM",
+                        "number": 26605,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CHM&crse_numb_in=26605",
+                        "title": "Organic Chemistry"
+                    }
+                },
+                {
+                    "type": "or",
+                    "value": [
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "CHM",
+                                "number": 26400,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CHM&crse_numb_in=26400",
+                                "title": "Organic Chemistry Laboratory"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "CHM",
+                                "number": 26600,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CHM&crse_numb_in=26600",
+                                "title": "Organic Chemistry Laboratory"
+                            }
+                        },
+                        {
+                            "type": "course",
+                            "value": {
+                                "subject": "CHM",
+                                "number": 26800,
+                                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CHM&crse_numb_in=26800",
+                                "title": "Organic Chemistry Laboratory Honors"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Earth, Atmospheric, and Planetary Sciences Sequence",
+            "type": "and",
+            "value": [
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "EAPS",
+                        "number": 11100,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=EAPS&crse_numb_in=11100",
+                        "title": "Physical Geology"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "EAPS",
+                        "number": 11200,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=EAPS&crse_numb_in=11200",
+                        "title": "Earth Through Time"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Physics Sequence 1",
+            "type": "and",
+            "value": [
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "PHYS",
+                        "number": 17200,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=PHYS&crse_numb_in=17200",
+                        "title": "Modern Mechanics"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "PHYS",
+                        "number": 27200,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=PHYS&crse_numb_in=27200",
+                        "title": "Electric And Magnetic Interactions"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Physics Sequence 2",
+            "type": "and",
+            "value": [
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "PHYS",
+                        "number": 17200,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=PHYS&crse_numb_in=17200",
+                        "title": "Modern Mechanics"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "PHYS",
+                        "number": 24100,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=PHYS&crse_numb_in=24100",
+                        "title": "Electricity And Optics"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "PHYS",
+                        "number": 25200,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=PHYS&crse_numb_in=25200",
+                        "title": "Electricity And Optics Laboratory"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Physics Sequence 3",
+            "type": "and",
+            "value": [
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "PHYS",
+                        "number": 17200,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=PHYS&crse_numb_in=17200",
+                        "title": "Modern Mechanics"
+                    }
+                },
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "PHYS",
+                        "number": 22100,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=PHYS&crse_numb_in=22100",
+                        "title": "General Physics"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Physics Sequence 4",
+            "type": "and",
+            "value": [
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "PHYS",
+                        "number": 22000,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=PHYS&crse_numb_in=22000",
+                        "title": "General PhysicsPHYS 22100 - General Physics"
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Physics Sequence 5",
+            "type": "and",
+            "value": [
+                {
+                    "type": "course",
+                    "value": {
+                        "subject": "PHYS",
+                        "number": 23300,
+                        "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=PHYS&crse_numb_in=23300",
+                        "title": "Physics For Life Sciences IPHYS 23400 - Physics For Life Sciences II"
+                    }
+                }
+            ]
+        }
+    ]
+}
