@@ -82,7 +82,7 @@ comp = {
                     "value": tech_write_pres
                 },
                 {
-                    "type": "choose 2",
+                    "type": "pick 2",
                     "value": tech_pres + tech_write
                 }
             ]

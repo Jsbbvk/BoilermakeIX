@@ -43,7 +43,7 @@ cse = {
 		},
         {
             "title": "Electives",
-            "type": "choose 2",
+            "type": "pick 2",
             "value": parse_courses([
 				"CS 30700 - Software Engineering I",
 				"CS 42200 - Computer Networks",

@@ -24,7 +24,7 @@ cgviz = {
         },
         {
             "title": "Electives",
-            "type": "choose 3",
+            "type": "pick 3",
             "value": parse_courses([
 				"CS 35200 - Compilers: Principles And Practice"
 				"CS 35400 - Operating Systems"

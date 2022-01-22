@@ -16,17 +16,17 @@ systems = {
         },
         {
             "title": "Electives",
-            "type": "choose 3",
+            "type": "pick 3",
             "value": parse_courses([
-                "CS 30700 - Software Engineering I"
-                "CS 33400 - Fundamentals Of Computer Graphics"
-                "CS 35300 - Principles Of Concurrency And Parallelism"
-                "CS 38100 - Introduction To The Analysis Of Algorithms"
-                "CS 42600 - Computer Security"
-                "CS 44800 - Introduction To Relational Database Systems"
-                "CS 45600 - Programming Languages"
-                "CS 48900 - Embedded Systems"
-                "CS 49000 - Topics In Computer Sciences For Undergraduates "
+                "CS 30700 - Software Engineering I",
+                "CS 33400 - Fundamentals Of Computer Graphics",
+                "CS 35300 - Principles Of Concurrency And Parallelism",
+                "CS 38100 - Introduction To The Analysis Of Algorithms",
+                "CS 42600 - Computer Security",
+                "CS 44800 - Introduction To Relational Database Systems",
+                "CS 45600 - Programming Languages",
+                "CS 48900 - Embedded Systems",
+                "CS 49000 - Topics In Computer Sciences For Undergraduates ",
             ])
         }
     ]
