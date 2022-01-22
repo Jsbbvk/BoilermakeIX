@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { courseEquals } from '../../utilities/course'
 
 const initialState = {
-  majors: [],
+  tracks: [],
 }
 
 export const tracksSlice = createSlice({
