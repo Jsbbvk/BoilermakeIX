@@ -13,20 +13,38 @@ import {
 import { useSelector, useStore, useDispatch } from 'react-redux'
 import AddIcon from '@mui/icons-material/Add'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { useState } from 'react'
+import RemoveIcon from '@mui/icons-material/Close'
+import { useContext, useState } from 'react'
 import EditIcon from '@mui/icons-material/Edit'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import PromptDialog from '../../../common/PromptDialog'
 import { getStartingSemester, getNextSemester } from '../../../../utilities/semester'
-import { pushSemester, popSemester, renameSemester } from '../../../../store/reducers/semester'
+import {
+  pushSemester,
+  popSemester,
+  renameSemester,
+  removeCourseFromSemester,
+} from '../../../../store/reducers/semester'
 import ConfirmDialog from '../../../common/ConfirmDialog'
+import UserContext from '../../../../userContext'
+
+const StyledAccordion = styled(Accordion)({
+  backgroundColor: '#dba8574f',
+  marginBottom: 10,
+})
 
 function Semester({ index, title, courses }) {
   const dispatch = useDispatch()
   const { lastSemester } = useSelector((state) => state.semester)
 
+  const { setShow, setCourse } = useContext(UserContext)
+
   const [showRename, setShowRename] = useState(false)
   const [newRename, setNewRename] = useState('')
   const [showDelete, setShowDelete] = useState(false)
+
+  const [selectedCourse, setSelectedCourse] = useState(null)
+  const [showDeleteCourse, setShowDeleteCourse] = useState(false)
 
   const promptRename = () => {
     setShowRename(true)
@@ -64,30 +82,73 @@ function Semester({ index, title, courses }) {
     dispatch(popSemester())
   }
 
+  const courseClick = (subject, number) => {
+    setShow(true)
+    setCourse({ subject, number })
+  }
+
+  const promptDeleteCourse = (course) => {
+    setShowDeleteCourse(true)
+    setSelectedCourse(course)
+  }
+
+  const cancelDeleteCourse = () => {
+    setShowDeleteCourse(false)
+  }
+
+  const deleteCourse = () => {
+    dispatch(
+      removeCourseFromSemester({
+        semesterTitle: title,
+        course: selectedCourse,
+      })
+    )
+    setShowDeleteCourse(false)
+  }
+
   return (
-    <Box sx={{ mb: 2 }}>
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <Typography variant="h5">{title}</Typography>
-        <IconButton title="Rename" onClick={promptRename} sx={{ ml: 'auto' }}>
-          <EditIcon />
-        </IconButton>
-        {lastSemester && lastSemester.title === title && (
-          <IconButton title="Delete" onClick={promptDelete}>
-            <DeleteIcon />
+    <Box>
+      <StyledAccordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          sx={{
+            alignItems: 'center',
+          }}
+        >
+          <Typography variant="h6">{title}</Typography>
+          <IconButton title="Rename" onClick={promptRename} sx={{ ml: 'auto' }}>
+            <EditIcon />
           </IconButton>
-        )}
-      </Box>
-      <Box id="courses" sx={{ textAlign: 'center' }}>
-        {courses.length === 0 ? (
-          <Typography>No courses</Typography>
-        ) : (
-          courses.map((course, i) => (
-            <p key={i}>
-              {course.subject} {course.number}
-            </p>
-          ))
-        )}
-      </Box>
+          {lastSemester && lastSemester.title === title && (
+            <IconButton title="Delete semester" onClick={promptDelete}>
+              <DeleteIcon />
+            </IconButton>
+          )}
+        </AccordionSummary>
+        <AccordionDetails sx={{ backgroundColor: 'black' }}>
+          {courses.length === 0 ? (
+            <Typography sx={{ fontStyle: 'italic', padding: 1 }}>No courses</Typography>
+          ) : (
+            courses.map((course, i) => (
+              <Box key={i} sx={{ padding: 1, display: 'flex', alignItems: 'center' }}>
+                <Typography
+                  onClick={() => courseClick(course.subject, course.number)}
+                  sx={{ cursor: 'pointer' }}
+                >
+                  {course.subject} {course.number}
+                </Typography>
+                <IconButton
+                  title="Remove course"
+                  sx={{ ml: 'auto' }}
+                  onClick={() => promptDeleteCourse(course)}
+                >
+                  <RemoveIcon />
+                </IconButton>
+              </Box>
+            ))
+          )}
+        </AccordionDetails>
+      </StyledAccordion>
       <PromptDialog
         open={showRename}
         defaultValue={title}
@@ -103,6 +164,15 @@ function Semester({ index, title, courses }) {
         onSubmit={deleteSem}
         title="Confirm Deletion"
         message={`Are you sure you want to delete "${title}"?`}
+      />
+      <ConfirmDialog
+        open={showDeleteCourse}
+        onClose={cancelDeleteCourse}
+        onSubmit={deleteCourse}
+        title="Confirm Deletion"
+        message={`Are you sure you want to delete "${selectedCourse && selectedCourse.subject} ${
+          selectedCourse && selectedCourse.number
+        }"?`}
       />
     </Box>
   )

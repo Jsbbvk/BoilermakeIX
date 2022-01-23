@@ -5,12 +5,16 @@ const initialState = {
   // NOTE: semesters shud be format { index: int, title: str, courses: [{ subject, number }] }
   semesters: [],
   lastSemester: null,
+  currentSemester: null,
 }
 
 export const semestersSlice = createSlice({
   name: 'semester',
   initialState,
   reducers: {
+    setCurrentSemester: (state, action) => {
+      state.currentSemester = action.payload
+    },
     pushSemester: (state, action) => {
       let newTitle = action.payload
       if (state.semesters.find((semester) => semester.title === action.payload)) {
@@ -52,15 +56,16 @@ export const semestersSlice = createSlice({
     },
     addCourseToSemester: (state, action) => {
       // pass in { semesterTitle, courseObj }
-      state.semesters
-        .at(state.semesters.find((sem) => sem.title === action.payload.semesterTitle))
-        .courses.push(action.payload.course)
+      state.semesters[
+        state.semesters.findIndex((sem) => sem.title === action.payload.semesterTitle)
+      ].courses.push(action.payload.course)
     },
     removeCourseFromSemester: (state, action) => {
       // pass in { semesterTitle, courseObj }
-      state.semesters
-        .at(state.semesters.find((sem) => sem.title === action.paylod.semesterTitle))
-        .courses.filter((course) => !courseEquals(course, action.payload.course))
+      const i = state.semesters.findIndex((sem) => sem.title === action.payload.semesterTitle)
+      state.semesters[i].courses = state.semesters[i].courses.filter(
+        (course) => !courseEquals(course, action.payload.course)
+      )
     },
   },
 })

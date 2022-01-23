@@ -37,7 +37,7 @@ def parse_courses(course_strs):
 TYPES = [
     "and",
     "or",
-    "choose n",
+    "pick n",
     "wrap",
     
     "course",

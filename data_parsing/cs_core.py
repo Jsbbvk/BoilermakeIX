@@ -87,6 +87,14 @@ cs_core = {
     "value": [
         {
             "type": "course",
+            "value": Course("CS", 19100, "Freshman Resources Seminar").get_dict()
+        },
+        {
+            "type": "course",
+            "value": Course("CS", 19300, "Tools").get_dict()
+        },
+        {
+            "type": "course",
             "value": Course("CS", 18000, "Problem Solving And Object-Oriented Programming").get_dict()
         },
         {
