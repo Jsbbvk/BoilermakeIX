@@ -21,11 +21,8 @@ export {
   addCourseToSemester,
   removeCourseFromSemester,
   setCurrentSemester,
-<<<<<<< HEAD
   removeCourseFromSemesters,
-=======
   setSemesters,
->>>>>>> 132d01c7364c7987cd267e240e786246405c0f24
 } from './reducers/semester'
 
 export { addTrack, removeTrack, setTracks } from './reducers/tracks'

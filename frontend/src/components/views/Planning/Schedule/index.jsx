@@ -1,21 +1,5 @@
-<<<<<<< HEAD
 import { Box, Typography, styled, Button, IconButton } from '@mui/material'
-import { useSelector, useDispatch } from 'react-redux'
-=======
-import {
-  Box,
-  Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Container,
-  styled,
-  Chip,
-  Button,
-  IconButton,
-} from '@mui/material'
-import { useSelector, useStore, useDispatch, batch } from 'react-redux'
->>>>>>> 132d01c7364c7987cd267e240e786246405c0f24
+import { useSelector, useDispatch, batch } from 'react-redux'
 import AddIcon from '@mui/icons-material/Add'
 import { useEffect } from 'react'
 import DownloadIcon from '@mui/icons-material/Download'
@@ -24,7 +8,7 @@ import Semester from './Semester'
 import { getStartingSemester, getNextSemester } from '../../../../utilities/semester'
 import { pushSemester } from '../../../../store/reducers/semester'
 import { exportCsv } from '../../../../utilities/save'
-<<<<<<< HEAD
+import { setCourse, setSemesters, setTracks } from '../../../../store'
 
 const StyledButton = styled(Button)({
   textTransform: 'none',
@@ -43,9 +27,6 @@ const StyledButton = styled(Button)({
     transform: 'scale(0.96)',
   },
 })
-=======
-import { setCourse, setTracks, setSemesters } from '../../../../store'
->>>>>>> 132d01c7364c7987cd267e240e786246405c0f24
 
 function Schedule() {
   const dispatch = useDispatch()
@@ -129,12 +110,8 @@ function Schedule() {
           </StyledButton>
           <StyledButton variant="contained" startIcon={<UploadIcon />} component="label">
             Import
-<<<<<<< HEAD
+            <input id="importFileUpload" type="file" hidden onChange={importCsv} />{' '}
           </StyledButton>
-=======
-            <input id="importFileUpload" type="file" hidden onChange={importCsv} />
-          </Button>
->>>>>>> 132d01c7364c7987cd267e240e786246405c0f24
         </Box>
         <Box>
           {semesters.length === 0 ? (
