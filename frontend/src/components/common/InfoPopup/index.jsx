@@ -24,6 +24,7 @@ import UserContext from '../../../userContext'
 import SelectDialog from '../SelectDialog'
 import { addCourseToSemester } from '../../../store'
 import AlertDialog from '../AlertDialog'
+import { checkPrereqs, hasTaken } from '../../../utilities/course'
 
 // TODO: perhaps move this to a diff place besides common
 
@@ -53,11 +54,11 @@ const StyledChip = styled(Chip)({
 
 function InfoPopup() {
   const { semesters, lastSemester } = useSelector((state) => state.semester)
+  const { previousCourses } = useSelector((state) => state.course)
   const dispatch = useDispatch()
 
   const [loading, setLoading] = useState(true)
   const [info, setInfo] = useState({})
-  const [addable, setAddable] = useState(true)
   const { showCourseInfo, courseInfo, setShow } = useContext(UserContext)
 
   useEffect(() => {
@@ -71,8 +72,6 @@ function InfoPopup() {
     if (courseInfo) {
       setLoading(true)
       getCourseFetch()
-      // TODO: check if course is addable to semester (e.g. doesn't exist on schedule, prereqs met)
-      setAddable(true)
     }
   }, [courseInfo])
 
@@ -82,7 +81,9 @@ function InfoPopup() {
 
   const [showAddDialog, setShowAdd] = useState(false)
   const [semesterToAdd, setSemesterToAdd] = useState('')
-  const [showSuccessAdd, setShowSuccess] = useState(false)
+  const [showStatus, setShowStatus] = useState(false)
+  const [addSuccess, setAddSuccess] = useState(false)
+  const [isDupeCourse, setDupeCourse] = useState(false)
 
   const promptAdd = () => {
     setShowAdd(true)
@@ -98,14 +99,30 @@ function InfoPopup() {
   }
 
   const addToSemester = () => {
-    dispatch(
-      addCourseToSemester({
-        semester: semesterToAdd,
-        course: courseInfo,
-      })
-    )
     setShowAdd(false)
-    setShowSuccess(true)
+    const chosenSemester = semesters.find((s) => s.title === semesterToAdd)
+    const dupe = hasTaken(courseInfo, previousCourses)
+    setDupeCourse(dupe)
+    if (!dupe && checkPrereqs(info, previousCourses, chosenSemester)) {
+      dispatch(
+        addCourseToSemester({
+          semesterTitle: semesterToAdd,
+          course: courseInfo,
+        })
+      )
+      setAddSuccess(true)
+    } else {
+      setAddSuccess(false)
+    }
+    setShowStatus(true)
+    // dispatch(
+    //   addCourseToSemester({
+    //     semester: semesterToAdd,
+    //     course: courseInfo,
+    //   })
+    // )
+    // setAddSuccess(true)
+    // setShowStatus(true)
   }
 
   return (
@@ -145,11 +162,9 @@ function InfoPopup() {
             <Typography sx={{ mb: 1 }}>
               <strong>Credits:</strong> {parseFloat(info.credits).toPrecision(3)}
             </Typography>
-            {!addable && (
-              <Typography sx={{ mb: 1 }} color="red">
-                Some prerequisites have not been fufilled yet!
-              </Typography>
-            )}
+            {/* <Typography sx={{ mb: 1 }} color="red">
+              Some prerequisites have not been fufilled yet!
+            </Typography> */}
             <StyledAccordion>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -171,7 +186,7 @@ function InfoPopup() {
               <Button
                 variant="contained"
                 startIcon={<AddIcon />}
-                disabled={!addable}
+                // disabled={!addable}
                 title="Add to your semester schedule"
                 onClick={promptAdd}
               >
@@ -200,12 +215,13 @@ function InfoPopup() {
               noOptionsMessage="No semesters created yet!"
             />
             <AlertDialog
-              open={showSuccessAdd}
-              onClose={() => setShowSuccess(false)}
-              title="Success"
-              message={`Successfully added ${
+              open={showStatus}
+              onClose={() => setShowStatus(false)}
+              title={addSuccess ? 'Success' : 'Error'}
+              message={`${addSuccess ? 'Successfully added' : 'Could not add'} ${
                 courseInfo && `${courseInfo.subject} ${courseInfo.number}`
-              } to ${semesterToAdd}`}
+              } to ${semesterToAdd}. ${isDupeCourse ? 'You have taken this course already!' : ''}
+                  ${!addSuccess ? 'Prerequisites not met!' : ''}`}
             />
             {/* TODO: auto generate semester? */}
           </>

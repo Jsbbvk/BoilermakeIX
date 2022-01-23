@@ -6,6 +6,24 @@
             "type": "course",
             "value": {
                 "subject": "CS",
+                "number": 19100,
+                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=19100",
+                "title": "Freshman Resources Seminar"
+            }
+        },
+        {
+            "type": "course",
+            "value": {
+                "subject": "CS",
+                "number": 19300,
+                "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=19300",
+                "title": "Tools"
+            }
+        },
+        {
+            "type": "course",
+            "value": {
+                "subject": "CS",
                 "number": 18000,
                 "url": "https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202310&subj_code_in=CS&crse_numb_in=18000",
                 "title": "Problem Solving And Object-Oriented Programming"

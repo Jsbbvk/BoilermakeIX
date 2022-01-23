@@ -63,17 +63,7 @@ def get_course(subject, number):
             prereqs = [
 				{
 					"type": "and",
-					"value": [
-						{
-							"type": "course_corequisite",
-							"value": Course("CS", 19100, "Freshman Resources Seminar").get_dict()
-						},
-						{
-							"type": "course_corequisite",
-							"value": Course("CS", 19300, "Tools").get_dict()
-						},
-						prereqs[0]
-					]
+					"value": []
 				}
 			]
 			

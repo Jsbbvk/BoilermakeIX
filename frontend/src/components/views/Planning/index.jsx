@@ -73,9 +73,9 @@ const Planning = memo(() => {
     []
   )
 
-  useEffect(() => {
-    console.log(curriculumProgress)
-  }, [curriculumProgress])
+  // useEffect(() => {
+  //   console.log(curriculumProgress)
+  // }, [curriculumProgress])
 
   const colorMap = useMemo(() => new Map(), [])
 
@@ -87,7 +87,7 @@ const Planning = memo(() => {
             i === self.findIndex((c) => c.subject === course.subject && c.number === course.number)
         )
         .sort((a, b) => {
-          console.log('sorting')
+          // console.log('sorting')
           if (a.subject === b.subject) return a.number - b.number
           return a.subject - b.subject
         })

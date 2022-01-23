@@ -52,15 +52,16 @@ export const semestersSlice = createSlice({
     },
     addCourseToSemester: (state, action) => {
       // pass in { semesterTitle, courseObj }
-      state.semesters
-        .at(state.semesters.find((sem) => sem.title === action.payload.semesterTitle))
-        .courses.push(action.payload.course)
+      state.semesters[
+        state.semesters.findIndex((sem) => sem.title === action.payload.semesterTitle)
+      ].courses.push(action.payload.course)
     },
     removeCourseFromSemester: (state, action) => {
       // pass in { semesterTitle, courseObj }
-      state.semesters
-        .at(state.semesters.find((sem) => sem.title === action.paylod.semesterTitle))
-        .courses.filter((course) => !courseEquals(course, action.payload.course))
+      const i = state.semesters.findIndex((sem) => sem.title === action.payload.semesterTitle)
+      state.semesters[i].courses = state.semesters[i].courses.filter(
+        (course) => !courseEquals(course, action.payload.course)
+      )
     },
   },
 })
