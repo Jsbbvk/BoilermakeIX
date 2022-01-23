@@ -1518,6 +1518,18 @@
         "title": "Foundations Of Computer Science"
     },
     {
+        "course_id": "CS 19100",
+        "subject": "CS",
+        "number": 19100,
+        "title": "Freshman Resources Seminar"
+    },
+    {
+        "course_id": "CS 19300",
+        "subject": "CS",
+        "number": 19300,
+        "title": "Tools"
+    },
+    {
         "course_id": "CS 24000",
         "subject": "CS",
         "number": 24000,
