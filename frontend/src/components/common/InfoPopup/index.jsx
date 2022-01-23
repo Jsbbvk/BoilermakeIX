@@ -17,14 +17,15 @@ import CloseIcon from '@mui/icons-material/Close'
 import AddIcon from '@mui/icons-material/Add'
 import LinkIcon from '@mui/icons-material/Link'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector, batch } from 'react-redux'
 import { getCourse } from '../../../api'
 import Course from '../../views/Planning/Course'
 import UserContext from '../../../userContext'
 import SelectDialog from '../SelectDialog'
-import { addCourseToSemester } from '../../../store'
+import { addCourse, addCourseToSemester, pushSemester } from '../../../store'
 import AlertDialog from '../AlertDialog'
 import { checkPrereqs, hasTaken } from '../../../utilities/course'
+import { getStartingSemester } from '../../../utilities/semester'
 
 // TODO: perhaps move this to a diff place besides common
 
@@ -86,6 +87,10 @@ function InfoPopup() {
   const [isDupeCourse, setDupeCourse] = useState(false)
 
   const promptAdd = () => {
+    if (semesters.length === 0) {
+      dispatch(pushSemester(getStartingSemester()))
+      setSemesterToAdd(lastSemester ? lastSemester.title : '')
+    }
     setShowAdd(true)
     setSemesterToAdd(lastSemester ? lastSemester.title : '')
   }
@@ -104,25 +109,20 @@ function InfoPopup() {
     const dupe = hasTaken(courseInfo, previousCourses)
     setDupeCourse(dupe)
     if (!dupe && checkPrereqs(info, previousCourses, chosenSemester)) {
-      dispatch(
-        addCourseToSemester({
-          semesterTitle: semesterToAdd,
-          course: courseInfo,
-        })
-      )
+      batch(() => {
+        dispatch(
+          addCourseToSemester({
+            semesterTitle: semesterToAdd,
+            course: courseInfo,
+          })
+        )
+        dispatch(addCourse(courseInfo))
+      })
       setAddSuccess(true)
     } else {
       setAddSuccess(false)
     }
     setShowStatus(true)
-    // dispatch(
-    //   addCourseToSemester({
-    //     semester: semesterToAdd,
-    //     course: courseInfo,
-    //   })
-    // )
-    // setAddSuccess(true)
-    // setShowStatus(true)
   }
 
   return (
@@ -216,7 +216,10 @@ function InfoPopup() {
             />
             <AlertDialog
               open={showStatus}
-              onClose={() => setShowStatus(false)}
+              onClose={() => {
+                setShowStatus(false)
+                if (addSuccess) setShow(false)
+              }}
               title={addSuccess ? 'Success' : 'Error'}
               message={`${addSuccess ? 'Successfully added' : 'Could not add'} ${
                 courseInfo && `${courseInfo.subject} ${courseInfo.number}`

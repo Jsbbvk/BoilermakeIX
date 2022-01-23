@@ -35,9 +35,16 @@ function Schedule() {
       </Typography>
       {/* <Box sx={{ backgroundColor: '#000000', padding: 3, mt: 2, borderRadius: 4 }}> */}
       <Box sx={{ mt: 4, pl: 3, pr: 3 }}>
-        {semesters.map((semester) => (
-          <Semester key={semester.index} {...semester} />
-        ))}
+        {semesters.length === 0 ? (
+          <Typography
+            variant="h6"
+            sx={{ mb: 2, fontStyle: 'italic', width: '100%', textAlign: 'center' }}
+          >
+            No semesters yet
+          </Typography>
+        ) : (
+          semesters.map((semester) => <Semester key={semester.index} {...semester} />)
+        )}
         <Box sx={{ textAlign: 'center' }}>
           <Button
             variant="text"
