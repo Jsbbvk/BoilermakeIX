@@ -9,6 +9,13 @@ export const courseSlice = createSlice({
   initialState,
   reducers: {
     addCourse: (state, action) => {
+      if (
+        state.previousCourses.find(
+          (c) => c?.subject === action.payload?.subject && c?.number === action.payload?.number
+        )
+      )
+        return
+
       state.previousCourses.push(action.payload)
     },
     removeCourse: (state, action) => {

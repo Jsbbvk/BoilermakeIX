@@ -5,7 +5,8 @@
     "value": [
         {
             "title": "3 Language",
-            "type": "pick 3",
+            "type": "or",
+            "pick": 3,
             "value": [
                 {
                     "type": "course",
@@ -392,7 +393,8 @@
             "type": "and",
             "value": [
                 {
-                    "type": "pick 2",
+                    "type": "or",
+                    "pick": 2,
                     "value": [
                         {
                             "type": "course",
@@ -7407,7 +7409,8 @@
         },
         {
             "title": "3 Culture",
-            "type": "pick 3",
+            "type": "or",
+            "pick": 3,
             "value": [
                 {
                     "type": "course",

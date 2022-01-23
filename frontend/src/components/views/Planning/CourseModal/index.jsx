@@ -1,5 +1,8 @@
-import { Box, styled, Button, Stack, Dialog, Typography, Fade } from '@mui/material'
-import { useState, forwardRef } from 'react'
+import { Box, styled, Button, Stack, Dialog, Typography, Fade, LinearProgress } from '@mui/material'
+import { useState, forwardRef, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { getPercentageOfCompletion } from '../../../../utilities'
+// eslint-disable-next-line import/no-cycle
 import Course from '../Course'
 
 const StyledButton = styled(Button)({
@@ -40,24 +43,47 @@ const scrollStyles = {
 }
 
 function CourseModal({ curriculum }) {
+  const { previousCourses } = useSelector((state) => state.course)
+
   const [open, setOpen] = useState(false)
+  const [percent, setPercent] = useState(0)
+
+  useEffect(() => {
+    if (open) setPercent(getPercentageOfCompletion(curriculum, previousCourses, 100))
+  }, [previousCourses, open, curriculum])
 
   return (
     <Stack alignItems={{ xs: 'center', md: 'flex-start' }} px={3}>
-      <Dialog
-        open={open}
-        onClose={() => setOpen(false)}
-        TransitionComponent={Transition}
-        maxWidth="lg"
-        PaperProps={{ sx: scrollStyles }}
-      >
-        <Box py={4} px={{ xs: 2, md: 5 }}>
-          <Box mb={3}>
-            <Typography variant="h6">{curriculum.title}</Typography>
+      {open && (
+        <Dialog
+          open={open}
+          onClose={() => setOpen(false)}
+          TransitionComponent={Transition}
+          maxWidth="lg"
+          PaperProps={{ sx: scrollStyles }}
+        >
+          <Box py={4} px={{ xs: 2, md: 5 }}>
+            <Box mb={3}>
+              <Stack direction="row" alignItems="center" spacing={2}>
+                <Typography variant="h6">{curriculum.title}</Typography>
+                <Box
+                  sx={{
+                    width: '75px',
+                    color: () => {
+                      if (percent < 50) return '#d32f2f'
+                      if (percent < 100) return '#fbc02d'
+                      return '#66bb6a'
+                    },
+                  }}
+                >
+                  <LinearProgress variant="determinate" value={percent} color="inherit" />
+                </Box>
+              </Stack>
+            </Box>
+            <Course {...curriculum} />
           </Box>
-          <Course {...curriculum} />
-        </Box>
-      </Dialog>
+        </Dialog>
+      )}
       <StyledButton onClick={() => setOpen(true)}>Show all courses</StyledButton>
     </Stack>
   )

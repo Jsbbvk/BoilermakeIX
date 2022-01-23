@@ -31,7 +31,8 @@ mi = {
         },
         {
             "title": "Electives",
-            "type": "pick 2",
+            "type": "or",
+			"pick": 2,
             "value": parse_courses([
                 "CS 31400 - Numerical Methods",
 				"CS 34800 - Information Systems",

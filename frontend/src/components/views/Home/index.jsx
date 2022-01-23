@@ -18,7 +18,7 @@ import {
 import { useState, useRef, useCallback, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Planning from '../Planning'
-import { setCourse, addCourse, removeCourse } from '../../../store'
+import { setTracks, addCourse, removeCourse } from '../../../store'
 import COURSES from '../../../constants/allcourses.json'
 
 const StyledChip = styled(Chip, {
@@ -68,9 +68,11 @@ const COURSE_NAMES = COURSES.map((course) => `${course.course_id}: ${course.titl
 
 function Home() {
   const dispatch = useDispatch()
+  const degreeRef = useRef(null)
+
+  const { previousCourses } = useSelector((state) => state.course)
 
   const [selectedTracks, setSelectedTracks] = useState([])
-  const [selectedCourses, setSelectedCourses] = useState([])
   const [courseValue, setCourseValue] = useState(null)
   const [courseInputValue, setCourseInputValue] = useState('')
 
@@ -81,37 +83,68 @@ function Home() {
       p.find((t) => t === track) ? p.filter((t) => t !== track) : [...p, track]
     )
   }
+
+  useEffect(() => {
+    dispatch(setTracks(selectedTracks))
+  }, [selectedTracks, dispatch])
+
   const onCourseChange = (_, course, details) => {
     if (details !== 'selectOption') return
 
     setCourseInputValue('')
     setCourseValue(null)
-    setSelectedCourses((p) => [...p, course])
     dispatch(
       addCourse({
         subject: course.split(' ')[0],
         number: parseInt(course.split(' ')[1].slice(0, -1)),
+        title: course.substring(course.indexOf(':') + 2),
       })
     )
   }
 
   const onCourseDelete = (course) => {
-    setSelectedCourses((p) => p.filter((c) => c !== course))
     dispatch(
       removeCourse({
         subject: course.split(' ')[0],
         number: parseInt(course.split(' ')[1].slice(0, -1)),
+        title: course.substring(course.indexOf(':')),
       })
     )
   }
 
+  const doScrolling = (elementY, duration) => {
+    const startingY = window.pageYOffset
+    const diff = elementY - startingY
+    let start
+
+    window.requestAnimationFrame(function step(timestamp) {
+      if (!start) start = timestamp
+      const time = timestamp - start
+      const percent = Math.min(time / duration, 1)
+
+      window.scrollTo(0, startingY + diff * percent)
+
+      if (time < duration) {
+        window.requestAnimationFrame(step)
+      }
+    })
+  }
+
   const onStartPlanning = () => {
     setShowPlanning(true)
+
+    if (degreeRef.current) doScrolling(degreeRef.current.getBoundingClientRect().top, 250)
   }
+
+  useEffect(() => {
+    if (showPlanning) doScrolling(degreeRef.current.getBoundingClientRect().top, 400)
+  }, [showPlanning])
+
+  const buildCourse = ({ subject, number, title }) => `${subject} ${number}: ${title}`
 
   return (
     <Container sx={{ py: 7 }}>
-      <Box sx={{ textAlign: 'center', mb: 30 }}>
+      <Box sx={{ textAlign: 'center' }}>
         <Typography variant="h2">&#127345;️lanner</Typography>
         <Box mt={5}>
           <Typography variant="h6">Select CS Tracks</Typography>
@@ -135,7 +168,9 @@ function Home() {
               value={courseValue}
               inputValue={courseInputValue}
               onInputChange={(_, course) => setCourseInputValue(course || '')}
-              options={COURSE_NAMES.filter((course) => !selectedCourses.includes(course))}
+              options={COURSE_NAMES.filter(
+                (course) => !previousCourses.find((c) => buildCourse(c) === course)
+              )}
               onChange={onCourseChange}
               ListboxProps={{
                 sx: {
@@ -162,35 +197,37 @@ function Home() {
               )}
             />
           </Stack>
-          {Boolean(selectedCourses?.length) && (
+          {Boolean(previousCourses?.length) && (
             <Box mt={3}>
-              {selectedCourses.map((course) => (
-                <StyledChip
-                  key={course}
-                  label={course}
-                  onDelete={() => onCourseDelete(course)}
-                  disableHover
-                  sx={{
-                    backgroundColor: '#dba857d6',
-                    '& > .MuiChip-label': {
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      maxWidth: 'min(80vw, 400px)',
-                    },
-                  }}
-                />
-              ))}
+              {previousCourses?.map((courseObj) => {
+                const course = buildCourse(courseObj)
+                return (
+                  <StyledChip
+                    key={course}
+                    label={course}
+                    onDelete={() => onCourseDelete(course)}
+                    disableHover
+                    sx={{
+                      backgroundColor: '#dba857d6',
+                      '& > .MuiChip-label': {
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        maxWidth: 'min(80vw, 400px)',
+                      },
+                    }}
+                  />
+                )
+              })}
             </Box>
           )}
         </Box>
-        <Box mt={26}>
+        <Box mt={10}>
           <StyledButton onClick={onStartPlanning}>Start Planning!</StyledButton>
         </Box>
       </Box>
-      <Fade in unmountOnExit>
-        {/* TODO scroll to planning */}
-        <Box>
+      <Fade in={showPlanning}>
+        <Box ref={degreeRef} sx={{ mt: 30, ...(!showPlanning && { display: 'none' }) }}>
           <Planning />
         </Box>
       </Fade>

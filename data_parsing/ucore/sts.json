@@ -1,6 +1,7 @@
 {
     "title": "Science, Technology, and Society (STS)",
     "type": "or",
+	"size": "large",
     "value": [
         {
             "type": "course",

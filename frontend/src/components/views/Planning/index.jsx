@@ -18,9 +18,9 @@ import { useCallback, useEffect, useMemo, memo, useContext, createContext, useSt
 import Course from './Course'
 import UCORE from '../../../constants/ucore'
 import MAJOR from '../../../constants/major'
-import TRACKS from '../../../constants/tracks'
+import TRACKS_JSON from '../../../constants/tracks'
 import CourseModal from './CourseModal'
-import { coursesInList } from '../../../utilities'
+import { coursesInList, getPercentageOfCompletion } from '../../../utilities'
 import Schedule from './Schedule'
 
 const StyledAccordion = styled(Accordion)({
@@ -59,7 +59,11 @@ export const DegreeProgressContext = createContext({
 
 const Planning = memo(() => {
   const { previousCourses } = useSelector((state) => state.course)
+  const { tracks } = useSelector((state) => state.track)
   const [curriculumProgress, setCurriculumProgress] = useState({})
+  const [TRACKS, setTRACKS] = useState(TRACKS_JSON)
+  const [overallPercent, setOverallPercent] = useState(0)
+  const [sectionPercent, setSectionPercent] = useState(0)
 
   const degreeProgress = useMemo(
     () => ({
@@ -74,8 +78,59 @@ const Planning = memo(() => {
   )
 
   useEffect(() => {
-    console.log(curriculumProgress)
-  }, [curriculumProgress])
+    setTRACKS(Object.values(TRACKS_JSON).filter((c) => tracks.includes(c.title)))
+  }, [tracks])
+
+  useEffect(() => {
+    const curriculumCore = Object.values(UCORE).map((c) => c.title)
+    const curriculumMajor = Object.values(MAJOR).map((c) => c.title)
+    const curriculumTrack = Object.values(TRACKS).map((c) => c.title)
+
+    const getPercentageTotal = (keys) =>
+      Math.min(
+        100,
+        Math.round(
+          keys.reduce((prev, title) => prev + (curriculumProgress[title] || 0), 0) / keys.length
+        )
+      )
+
+    const coreP = getPercentageTotal(curriculumCore) || 0
+    const majorP = getPercentageTotal(curriculumMajor) || 0
+    const trackP = getPercentageTotal(curriculumTrack) || 0
+    setSectionPercent({
+      'University Core Curriculum': coreP,
+      'Major Requirements': majorP,
+      'Track Requirements': trackP,
+    })
+    setOverallPercent(Math.min(100, Math.round((coreP + majorP + trackP) / 3)))
+  }, [TRACKS, curriculumProgress])
+
+  useEffect(() => {
+    setCurriculumProgress((prev) => ({
+      ...prev,
+      ...Object.values(UCORE).reduce(
+        (p, curriculum) => ({
+          ...p,
+          [curriculum.title]: getPercentageOfCompletion(curriculum, previousCourses, 100),
+        }),
+        {}
+      ),
+      ...Object.values(MAJOR).reduce(
+        (p, curriculum) => ({
+          ...p,
+          [curriculum.title]: getPercentageOfCompletion(curriculum, previousCourses, 100),
+        }),
+        {}
+      ),
+      ...Object.values(TRACKS).reduce(
+        (p, curriculum) => ({
+          ...p,
+          [curriculum.title]: getPercentageOfCompletion(curriculum, previousCourses, 100),
+        }),
+        {}
+      ),
+    }))
+  }, [TRACKS, previousCourses])
 
   const colorMap = useMemo(() => new Map(), [])
 
@@ -87,7 +142,6 @@ const Planning = memo(() => {
             i === self.findIndex((c) => c.subject === course.subject && c.number === course.number)
         )
         .sort((a, b) => {
-          console.log('sorting')
           if (a.subject === b.subject) return a.number - b.number
           return a.subject - b.subject
         })
@@ -122,7 +176,26 @@ const Planning = memo(() => {
             alignItems: 'center',
           }}
         >
-          <Typography variant="h6">{title}</Typography>
+          <Stack direction="row" alignItems="center" spacing={2}>
+            <Typography variant="h6">{title}</Typography>
+            <Box
+              sx={{
+                width: '75px',
+                color: () => {
+                  const percent = sectionPercent[title]
+                  if (percent < 50) return '#d32f2f'
+                  if (percent < 100) return '#fbc02d'
+                  return '#66bb6a'
+                },
+              }}
+            >
+              <LinearProgress
+                variant="determinate"
+                value={sectionPercent[title] || 0}
+                color="inherit"
+              />
+            </Box>
+          </Stack>
         </AccordionSummary>
         <AccordionDetails>
           {Object.values(curriculumJSON).map((curriculum) => (
@@ -133,7 +206,26 @@ const Planning = memo(() => {
                   alignItems: 'center',
                 }}
               >
-                <Typography variant="h6">{curriculum.title}</Typography>
+                <Stack direction="row" alignItems="center" spacing={2}>
+                  <Typography variant="h6">{curriculum.title}</Typography>
+                  <Box
+                    sx={{
+                      width: '75px',
+                      color: () => {
+                        const percent = curriculumProgress[curriculum.title] || 0
+                        if (percent < 50) return '#d32f2f'
+                        if (percent < 100) return '#fbc02d'
+                        return '#66bb6a'
+                      },
+                    }}
+                  >
+                    <LinearProgress
+                      variant="determinate"
+                      value={curriculumProgress[curriculum.title] || 0}
+                      color="inherit"
+                    />
+                  </Box>
+                </Stack>
               </AccordionSummary>
               <AccordionDetails>
                 {curriculum.size === 'large' ? (
@@ -147,7 +239,7 @@ const Planning = memo(() => {
         </AccordionDetails>
       </StyledAccordion>
     ),
-    []
+    [curriculumProgress, sectionPercent]
   )
 
   return (
@@ -155,9 +247,24 @@ const Planning = memo(() => {
       <Grid container spacing={1}>
         <Grid item xs={8}>
           <Box>
-            <Typography variant="h3" sx={{ textAlign: 'center' }}>
-              Degree Plan
-            </Typography>
+            <Stack alignItems="center" spacing={2}>
+              <Typography variant="h3" sx={{ textAlign: 'center' }}>
+                Degree Plan
+              </Typography>
+              <Box
+                sx={{
+                  width: '150px',
+                  color: () => {
+                    const percent = overallPercent || 0
+                    if (percent < 50) return '#d32f2f'
+                    if (percent < 100) return '#fbc02d'
+                    return '#66bb6a'
+                  },
+                }}
+              >
+                <LinearProgress variant="determinate" value={overallPercent || 0} color="inherit" />
+              </Box>
+            </Stack>
             <Box mt={4}>
               {displayCurriculums(UCORE, 'University Core Curriculum')}
               {displayCurriculums(MAJOR, 'Major Requirements')}
@@ -170,7 +277,26 @@ const Planning = memo(() => {
                     alignItems: 'center',
                   }}
                 >
-                  <Typography variant="h6">Track Requirements</Typography>
+                  <Stack direction="row" alignItems="center" spacing={2}>
+                    <Typography variant="h6">Track Requirements</Typography>
+                    <Box
+                      sx={{
+                        width: '75px',
+                        color: () => {
+                          const percent = sectionPercent['Track Requirements'] || 0
+                          if (percent < 50) return '#d32f2f'
+                          if (percent < 100) return '#fbc02d'
+                          return '#66bb6a'
+                        },
+                      }}
+                    >
+                      <LinearProgress
+                        variant="determinate"
+                        value={sectionPercent['Track Requirements'] || 0}
+                        color="inherit"
+                      />
+                    </Box>
+                  </Stack>
                 </AccordionSummary>
                 <AccordionDetails>
                   {Object.values(TRACKS).map((curriculum) => (

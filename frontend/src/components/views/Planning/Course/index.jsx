@@ -20,8 +20,6 @@ import {
   courseExist,
   getAllCourses,
 } from '../../../../utilities'
-// eslint-disable-next-line import/no-cycle
-import { DegreeProgressContext } from '..'
 import UserContext from '../../../../userContext'
 
 const StyledChip = styled(Chip)({
@@ -121,7 +119,6 @@ const mapStateToProps = (state) => ({
 const PercentageDisplay = connect(mapStateToProps)(
   memo(
     ({ previousCourses, value, depth, curriculum, courseList }) => {
-      const { setProgress } = useContext(DegreeProgressContext)
       const [percent, setPercent] = useState(0)
 
       const getPercentage = useCallback((v, p) => getPercentageOfCompletion(v, p, 100), [])
@@ -129,10 +126,7 @@ const PercentageDisplay = connect(mapStateToProps)(
       useEffect(() => {
         const pValue = getPercentage(value, previousCourses)
         setPercent(pValue)
-        if (depth === 2) {
-          setProgress(curriculum, pValue)
-        }
-      }, [value, previousCourses, depth, getPercentage, setProgress, curriculum])
+      }, [value, previousCourses, getPercentage, curriculum])
 
       return (
         <Box

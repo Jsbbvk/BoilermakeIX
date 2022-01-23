@@ -4,7 +4,8 @@ import CSE from './cse'
 import DBIS from './dbis.json'
 import MI from './mi.json'
 import SECURITY from './security.json'
+import PL from './pl.json'
 import SWE from './swe.json'
 import SYSTEMS from './systems.json'
 
-export default { ALGO, CGVIZ, CSE, DBIS, MI, SECURITY, SWE, SYSTEMS }
+export default { ALGO, CGVIZ, CSE, DBIS, MI, SECURITY, SWE, SYSTEMS, PL }

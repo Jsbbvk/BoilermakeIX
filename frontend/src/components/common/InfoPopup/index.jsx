@@ -207,6 +207,7 @@ function InfoPopup() {
                 courseInfo && `${courseInfo.subject} ${courseInfo.number}`
               } to ${semesterToAdd}`}
             />
+            {/* TODO: auto generate semester? */}
           </>
         )}
       </Box>

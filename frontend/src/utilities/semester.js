@@ -13,5 +13,5 @@ export const getNextSemester = (currentSemester) => {
       return `${sem === 'Spring' ? 'Fall' : 'Spring'} ${sem === 'Spring' ? year : year + 1}`
     }
   }
-  return currentSemester
+  return 'New Semester'
 }

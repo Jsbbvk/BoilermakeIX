@@ -21,4 +21,5 @@ export {
   addCourseToSemester,
   removeCourseFromSemester,
 } from './reducers/semester'
-export { addTrack, removeTrack } from './reducers/tracks'
+
+export { addTrack, removeTrack, setTracks } from './reducers/tracks'

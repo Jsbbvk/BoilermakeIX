@@ -38,7 +38,7 @@
         {
             "title": "Electives",
             "type": "or",
-            "pick": 3,
+            "pick": 2,
             "value": [
                 {
                     "type": "course",

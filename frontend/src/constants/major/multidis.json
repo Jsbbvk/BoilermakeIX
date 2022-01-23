@@ -1,6 +1,7 @@
 {
     "title": "Multidisciplinary Experience",
     "type": "or",
+	  "size": "large",
     "value": [
         {
             "type": "course",
