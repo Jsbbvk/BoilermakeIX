@@ -108,7 +108,7 @@ function Semester({ index, title, courses }) {
 
   return (
     <Box>
-      <Accordion defaultExpanded sx={{ backgroundColor: '#dba8574f', mb: 10 }}>
+      <Accordion defaultExpanded sx={{ backgroundColor: '#dba8574f' }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           sx={{
@@ -116,11 +116,11 @@ function Semester({ index, title, courses }) {
           }}
         >
           <Typography variant="h6">{title}</Typography>
-          <IconButton title="Rename" onClick={promptRename} sx={{ ml: 'auto' }}>
+          <IconButton size="small" title="Rename" onClick={promptRename} sx={{ ml: 'auto' }}>
             <EditIcon />
           </IconButton>
           {lastSemester && lastSemester.title === title && (
-            <IconButton title="Delete semester" onClick={promptDelete}>
+            <IconButton size="small" title="Delete semester" onClick={promptDelete}>
               <DeleteIcon />
             </IconButton>
           )}

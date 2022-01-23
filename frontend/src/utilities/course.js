@@ -13,7 +13,9 @@ export const courseExist = ({ type, value }, prevCourses, currentSemester) => {
           (_value.type === 'course' &&
             hasTaken(_value.value, prevCourses) &&
             currentSemester.courses.find((c) => courseEquals(c, _value.value)) === undefined) ||
-          (_value.type !== 'course' && courseExist(_value, prevCourses) && _value.type) ||
+          (_value.type !== 'course' &&
+            courseExist(_value, prevCourses, currentSemester) &&
+            _value.type) ||
           (_value.type === 'course_corequiste' &&
             currentSemester.courses.find((c) => courseEquals(c, _value.value))) ||
           (_value.type === 'course_concurrent' &&
@@ -30,7 +32,7 @@ export const courseExist = ({ type, value }, prevCourses, currentSemester) => {
           (_value.type === 'course' &&
             hasTaken(_value.value, prevCourses) &&
             currentSemester.courses.find((c) => courseEquals(c, _value.value)) === undefined) ||
-          (_value.type !== 'course' && courseExist(_value, prevCourses)) ||
+          (_value.type !== 'course' && courseExist(_value, prevCourses, currentSemester)) ||
           (_value.type === 'course_corequiste' &&
             currentSemester.courses.find((c) => courseEquals(c, _value.value))) ||
           (_value.type === 'course_concurrent' &&

@@ -53,7 +53,7 @@ def get_course(subject, number):
                     })
             elif word == "concurrently]":
                 if len(prereqs[-1]["value"]) > 0:
-                    prereqs[-1]["value"][-1]["type"] = "course_concurrent"
+                    prereqs[-1]["value"].pop()
             elif word == ")":
                 if len(prereqs) != 1:
                     last = prereqs.pop()

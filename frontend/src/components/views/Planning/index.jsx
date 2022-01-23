@@ -219,7 +219,7 @@ const Planning = memo(() => {
             </Box>
           </Box>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={4} elevation={3}>
           <Schedule />
         </Grid>
       </Grid>
