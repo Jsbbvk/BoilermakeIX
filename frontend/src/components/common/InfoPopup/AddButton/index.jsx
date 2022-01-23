@@ -102,9 +102,11 @@ function AddButton({ courseInfo, close }) {
       )
       dispatch(
         addCourse({
-          number: courseInfo.number,
-          subject: courseInfo.subject,
-          title: courseInfo.title,
+          course: {
+            number: courseInfo.number,
+            subject: courseInfo.subject,
+            title: courseInfo.title,
+          },
         })
       )
     })
@@ -134,8 +136,8 @@ function AddButton({ courseInfo, close }) {
 
   const onDelete = () => {
     batch(() => {
-      dispatch(removeCourse(courseInfo))
-      dispatch(removeCourseFromSemesters(courseInfo))
+      dispatch(removeCourse({ course: courseInfo }))
+      dispatch(removeCourseFromSemesters({ course: courseInfo }))
     })
     close()
   }
@@ -144,7 +146,7 @@ function AddButton({ courseInfo, close }) {
     <>
       <ToastContainer />
       {isDupe ? (
-        <DeleteButton onClick={onDelete}>Delete course</DeleteButton>
+        <DeleteButton onClick={onDelete}>Remove course</DeleteButton>
       ) : (
         <ButtonGroup variant="contained" ref={anchorRef} sx={{ boxShadow: 'none' }}>
           <StyledButton

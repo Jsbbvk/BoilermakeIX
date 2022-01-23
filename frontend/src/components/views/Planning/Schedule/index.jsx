@@ -89,7 +89,7 @@ function Schedule() {
     let realTracks = arr.slice(1)
     if (realTracks[0] === '') realTracks = []
     batch(() => {
-      dispatch(setCourse(realPc))
+      dispatch(setCourse({ courses: realPc }))
       dispatch(setSemesters(realSem))
       dispatch(setTracks(realTracks))
     })
