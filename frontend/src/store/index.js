@@ -20,6 +20,7 @@ export {
   renameSemester,
   addCourseToSemester,
   removeCourseFromSemester,
+  setCurrentSemester,
 } from './reducers/semester'
 
 export { addTrack, removeTrack, setTracks } from './reducers/tracks'

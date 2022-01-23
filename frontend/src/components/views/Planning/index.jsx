@@ -244,8 +244,8 @@ const Planning = memo(() => {
 
   return (
     <DegreeProgressContext.Provider value={degreeProgress}>
-      <Grid container spacing={1}>
-        <Grid item xs={8}>
+      <Grid container spacing={1} direction={{ xs: 'column-reverse', md: 'row' }}>
+        <Grid item xs={12} md={8}>
           <Box>
             <Stack alignItems="center" spacing={2}>
               <Typography variant="h3" sx={{ textAlign: 'center' }}>
@@ -345,7 +345,7 @@ const Planning = memo(() => {
             </Box>
           </Box>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} md={4}>
           <Schedule />
         </Grid>
       </Grid>

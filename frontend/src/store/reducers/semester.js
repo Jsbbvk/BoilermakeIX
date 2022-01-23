@@ -26,6 +26,7 @@ export const semestersSlice = createSlice({
         courses: [],
       })
       state.lastSemester = state.semesters[state.semesters.length - 1]
+      state.currentSemester = state.semesters[state.semesters.length - 1]
     },
     insertSemester: (state, action) => {
       let { title } = action.payload
@@ -78,6 +79,7 @@ export const {
   renameSemester,
   addCourseToSemester,
   removeCourseFromSemester,
+  setCurrentSemester,
 } = semestersSlice.actions
 
 export default semestersSlice.reducer

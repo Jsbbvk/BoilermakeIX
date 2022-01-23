@@ -60,7 +60,7 @@ const style = {
 }
 
 const StyledAccordion = styled(Accordion)({
-  backgroundColor: '#dba8574f',
+  backgroundColor: '#a575286e',
 })
 
 const StyledButton = styled(Button)({})
@@ -99,11 +99,11 @@ function InfoPopup() {
   const [info, setInfo] = useState({})
   const { showCourseInfo, courseInfo, setShow } = useContext(UserContext)
 
-  const [showAddDialog, setShowAdd] = useState(false)
+  // const [showAddDialog, setShowAdd] = useState(false)
   const [semesterToAdd, setSemesterToAdd] = useState('')
-  const [showStatus, setShowStatus] = useState(false)
-  const [addSuccess, setAddSuccess] = useState(false)
-  const [isDupeCourse, setDupeCourse] = useState(false)
+  // const [showStatus, setShowStatus] = useState(false)
+  // const [addSuccess, setAddSuccess] = useState(false)
+  // const [isDupeCourse, setDupeCourse] = useState(false)
   const [percent, setPercent] = useState(0)
 
   useEffect(() => {
@@ -126,49 +126,60 @@ function InfoPopup() {
   }
 
   useEffect(() => {
-    console.log(info)
     if (!info.prereqs) return
     setPercent(getPercentageOfCompletion(info.prereqs, previousCourses, 100) || 0)
   }, [info, previousCourses])
 
-  const promptAdd = () => {
-    if (semesters.length === 0) {
-      dispatch(pushSemester(getStartingSemester()))
-      setSemesterToAdd(lastSemester ? lastSemester.title : '')
-    }
-    setShowAdd(true)
-    setSemesterToAdd(lastSemester ? lastSemester.title : '')
-  }
+  // const promptAdd = () => {
+  //   if (semesters.length === 0) {
+  //     dispatch(pushSemester(getStartingSemester()))
+  //     setSemesterToAdd(lastSemester ? lastSemester.title : '')
+  //   }
+  //   setShowAdd(true)
+  //   setSemesterToAdd(lastSemester ? lastSemester.title : '')
+  // }
 
-  const cancelAdd = () => {
-    setShowAdd(false)
-  }
+  // const cancelAdd = () => {
+  //   setShowAdd(false)
+  // }
 
-  const handleAddChange = (e) => {
-    setSemesterToAdd(e.target.value)
-  }
+  // const handleAddChange = (e) => {
+  //   setSemesterToAdd(e.target.value)
+  // }
 
-  const addToSemester = () => {
-    setShowAdd(false)
-    const chosenSemester = semesters.find((s) => s.title === semesterToAdd)
-    const dupe = hasTaken(courseInfo, previousCourses)
-    setDupeCourse(dupe)
-    if (!dupe && checkPrereqs(info, previousCourses, chosenSemester)) {
-      batch(() => {
-        dispatch(
-          addCourseToSemester({
-            semesterTitle: semesterToAdd,
-            course: courseInfo,
-          })
-        )
-        dispatch(addCourse(courseInfo))
-      })
-      setAddSuccess(true)
-    } else {
-      setAddSuccess(false)
-    }
-    setShowStatus(true)
-  }
+  // const addToSemester = () => {
+  //   setShowAdd(false)
+  //   const chosenSemester = semesters.find((s) => s.title === semesterToAdd)
+  //   const dupe = hasTaken(courseInfo, previousCourses)
+  //   setDupeCourse(dupe)
+  //   if (!dupe && checkPrereqs(info, previousCourses, chosenSemester)) {
+  //     batch(() => {
+  //       dispatch(
+  //         addCourseToSemester({
+  //           semesterTitle: semesterToAdd,
+  //           course: courseInfo,
+  //         })
+  //       )
+  //       dispatch(addCourse(courseInfo))
+  //     })
+  //     setAddSuccess(true)
+  //   } else {
+  //     setAddSuccess(false)
+  //   }
+  //   setShowStatus(true)
+  // }
+
+  // const addCourseToSem = (semesterTitle, course) => {
+  //   batch(() => {
+  //     dispatch(
+  //       addCourseToSemester({
+  //         semesterTitle,
+  //         course,
+  //       })
+  //     )
+  //     dispatch(addCourse(course))
+  //   })
+  // }
 
   return (
     <Dialog
@@ -176,12 +187,12 @@ function InfoPopup() {
       onClose={handleClose}
       TransitionComponent={Transition}
       maxWidth="lg"
-      PaperProps={{ sx: scrollStyles }}
+      PaperProps={{ sx: { ...scrollStyles, position: 'fixed', top: '10%' } }}
       fullWidth
     >
       <Box py={4} px={{ xs: 2, md: 5 }}>
         <Stack direction="row" justifyContent="space-between" alignItems="flex-start">
-          <Link href={info?.url ?? '#'} sx={{ width: '80%' }}>
+          <Link href={info?.url ?? '#'} sx={{ width: '80%' }} target="_blank">
             <Typography variant="h5">
               {courseInfo && courseInfo.subject} {courseInfo && courseInfo.number} -{' '}
               {courseInfo && info.title}
@@ -248,7 +259,7 @@ function InfoPopup() {
               </Box>
             )}
             <Stack mt={3} alignItems="center">
-              <AddButton />
+              <AddButton courseInfo={info} close={handleClose} />
             </Stack>
           </Box>
         )}

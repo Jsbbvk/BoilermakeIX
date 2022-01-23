@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import { useSelector, useStore, useDispatch } from 'react-redux'
 import AddIcon from '@mui/icons-material/Add'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Semester from './Semester'
 import PromptDialog from '../../../common/PromptDialog'
 import { getStartingSemester, getNextSemester } from '../../../../utilities/semester'
@@ -21,6 +21,11 @@ function Schedule() {
   const store = useStore()
   const dispatch = useDispatch()
   const { semesters, lastSemester } = useSelector((state) => state.semester)
+
+  useEffect(() => {
+    // Adds in starting semester
+    if (semesters.length === 0) dispatch(pushSemester(getStartingSemester()))
+  }, [dispatch, semesters])
 
   const addNewSemester = () => {
     if (semesters.length === 0) {
