@@ -68,6 +68,9 @@ export const semestersSlice = createSlice({
         (course) => !courseEquals(course, action.payload.course)
       )
     },
+    setSemesters: (state, action) => {
+      state.semesters = action.payload
+    },
   },
 })
 
@@ -80,6 +83,7 @@ export const {
   addCourseToSemester,
   removeCourseFromSemester,
   setCurrentSemester,
+  setSemesters,
 } = semestersSlice.actions
 
 export default semestersSlice.reducer

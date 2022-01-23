@@ -21,6 +21,7 @@ export {
   addCourseToSemester,
   removeCourseFromSemester,
   setCurrentSemester,
+  setSemesters,
 } from './reducers/semester'
 
 export { addTrack, removeTrack, setTracks } from './reducers/tracks'
