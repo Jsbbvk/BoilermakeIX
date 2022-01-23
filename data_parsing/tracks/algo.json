@@ -65,7 +65,8 @@
         },
         {
             "title": "Electives",
-            "type": "pick 3",
+            "type": "or",
+            "pick": 3,
             "value": [
                 {
                     "type": "course",

@@ -16,7 +16,8 @@ pl = {
         },
         {
             "title": "Electives",
-            "type": "pick 3",
+            "type": "or",
+			"pick": 3,
             "value": parse_courses([
                 "CS 35200 - Compilers: Principles And Practice",
                 "CS 38100 - Introduction To The Analysis Of Algorithms",

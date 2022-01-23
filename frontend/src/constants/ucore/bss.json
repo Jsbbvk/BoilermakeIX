@@ -1,7 +1,7 @@
 {
     "title": "Human Cultures: Behavioral/Social Science (BSS)",
-    "size": "large",
     "type": "or",
+	"size": "large",
     "value": [
         {
             "type": "course",

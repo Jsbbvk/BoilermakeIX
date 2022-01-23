@@ -16,7 +16,8 @@ systems = {
         },
         {
             "title": "Electives",
-            "type": "pick 3",
+            "type": "or",
+			"pick": 2,
             "value": parse_courses([
                 "CS 30700 - Software Engineering I",
                 "CS 33400 - Fundamentals Of Computer Graphics",

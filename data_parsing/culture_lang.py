@@ -81,7 +81,8 @@ culture_lang = {
     "value": [
         {
             "title": "3 Language",
-            "type": "pick 3",
+            "type": "or",
+			"pick": 3,
             "value": language
         },
         {
@@ -89,7 +90,8 @@ culture_lang = {
             "type": "and",
             "value": [
                 {
-                    "type": "pick 2",
+                    "type": "or",
+					"pick": 2,
                     "value": language
                 },
                 {
@@ -101,6 +103,7 @@ culture_lang = {
         {
             "title": "3 Culture",
             "type": "pick 3",
+			"pick": 3,
             "value": culture
         }
     ]

@@ -1,6 +1,7 @@
 {
     "title": "Laboratory Science",
     "type": "or",
+	"size": "large",
     "value": [
         {
             "title": "Biology Sequence 1",

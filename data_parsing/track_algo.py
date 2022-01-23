@@ -29,7 +29,8 @@ algo = {
         },
         {
             "title": "Electives",
-            "type": "pick 3",
+            "type": "or",
+			"pick": 3,
             "value": parse_courses([
                 "CS 31400 - Numerical Methods",
 				"CS 33400 - Fundamentals Of Computer Graphics",
