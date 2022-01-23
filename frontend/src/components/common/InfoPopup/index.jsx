@@ -2,68 +2,28 @@ import {
   Typography,
   Accordion,
   Box,
-  Chip,
   styled,
   AccordionSummary,
   AccordionDetails,
-  IconButton,
-  Button,
-  Modal,
   Skeleton,
   Stack,
   Fade,
   Dialog,
   Link,
   LinearProgress,
-  ButtonGroup,
-  ClickAwayListener,
-  Grow,
-  Paper,
-  Popper,
-  MenuItem,
-  MenuList,
 } from '@mui/material'
-import { forwardRef, useContext, useEffect, useRef, useState } from 'react'
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
+import { forwardRef, useContext, useEffect, useState } from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { useDispatch, useSelector, batch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { getCourse } from '../../../api'
 import Course from '../../views/Planning/Course'
 import UserContext from '../../../userContext'
-import SelectDialog from '../SelectDialog'
-import { addCourse, addCourseToSemester, pushSemester } from '../../../store'
-import AlertDialog from '../AlertDialog'
-import {
-  getStartingSemester,
-  getPercentageOfCompletion,
-  checkPrereqs,
-  hasTaken,
-} from '../../../utilities'
+import { getPercentageOfCompletion } from '../../../utilities'
 import AddButton from './AddButton'
-
-// TODO: perhaps move this to a diff place besides common
-
-const style = {
-  position: 'absolute',
-  top: '40%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  minWidth: 200,
-  bgcolor: 'background.paper',
-  // border: '2px solid #000',
-  boxShadow: 24,
-  outline: 'none',
-  p: 4,
-  borderRadius: 5,
-  maxHeight: 400,
-  overflowY: 'auto',
-}
 
 const StyledAccordion = styled(Accordion)({
   backgroundColor: '#a575286e',
 })
-
-const StyledButton = styled(Button)({})
 
 // eslint-disable-next-line react/display-name
 const Transition = forwardRef((props, ref) => <Fade ref={ref} {...props} />)
@@ -91,19 +51,12 @@ const scrollStyles = {
 }
 
 function InfoPopup() {
-  const { semesters, lastSemester } = useSelector((state) => state.semester)
   const { previousCourses } = useSelector((state) => state.course)
-  const dispatch = useDispatch()
 
   const [loading, setLoading] = useState(true)
   const [info, setInfo] = useState({})
   const { showCourseInfo, courseInfo, setShow } = useContext(UserContext)
 
-  // const [showAddDialog, setShowAdd] = useState(false)
-  const [semesterToAdd, setSemesterToAdd] = useState('')
-  // const [showStatus, setShowStatus] = useState(false)
-  // const [addSuccess, setAddSuccess] = useState(false)
-  // const [isDupeCourse, setDupeCourse] = useState(false)
   const [percent, setPercent] = useState(0)
 
   useEffect(() => {
@@ -129,57 +82,6 @@ function InfoPopup() {
     if (!info.prereqs) return
     setPercent(getPercentageOfCompletion(info.prereqs, previousCourses, 100) || 0)
   }, [info, previousCourses])
-
-  // const promptAdd = () => {
-  //   if (semesters.length === 0) {
-  //     dispatch(pushSemester(getStartingSemester()))
-  //     setSemesterToAdd(lastSemester ? lastSemester.title : '')
-  //   }
-  //   setShowAdd(true)
-  //   setSemesterToAdd(lastSemester ? lastSemester.title : '')
-  // }
-
-  // const cancelAdd = () => {
-  //   setShowAdd(false)
-  // }
-
-  // const handleAddChange = (e) => {
-  //   setSemesterToAdd(e.target.value)
-  // }
-
-  // const addToSemester = () => {
-  //   setShowAdd(false)
-  //   const chosenSemester = semesters.find((s) => s.title === semesterToAdd)
-  //   const dupe = hasTaken(courseInfo, previousCourses)
-  //   setDupeCourse(dupe)
-  //   if (!dupe && checkPrereqs(info, previousCourses, chosenSemester)) {
-  //     batch(() => {
-  //       dispatch(
-  //         addCourseToSemester({
-  //           semesterTitle: semesterToAdd,
-  //           course: courseInfo,
-  //         })
-  //       )
-  //       dispatch(addCourse(courseInfo))
-  //     })
-  //     setAddSuccess(true)
-  //   } else {
-  //     setAddSuccess(false)
-  //   }
-  //   setShowStatus(true)
-  // }
-
-  // const addCourseToSem = (semesterTitle, course) => {
-  //   batch(() => {
-  //     dispatch(
-  //       addCourseToSemester({
-  //         semesterTitle,
-  //         course,
-  //       })
-  //     )
-  //     dispatch(addCourse(course))
-  //   })
-  // }
 
   return (
     <Dialog
@@ -265,28 +167,6 @@ function InfoPopup() {
         )}
       </Box>
     </Dialog>
-
-    //         <SelectDialog
-    //           open={showAddDialog}
-    //           onClose={cancelAdd}
-    //           onSubmit={addToSemester}
-    //           onChange={handleAddChange}
-    //           defaultValue={semesterToAdd}
-    //           options={semesters.map((semester) => semester.title)}
-    //           title={`Add ${courseInfo && `${courseInfo.subject} ${courseInfo.number}`}`}
-    //           message="Choose which semester to add course to"
-    //           label="Semester"
-    //           noOptionsMessage="No semesters created yet!"
-    //         />
-    //         <AlertDialog
-    //           open={showStatus}
-    //           onClose={() => setShowStatus(false)}
-    //           title={addSuccess ? 'Success' : 'Error'}
-    //           message={`${addSuccess ? 'Successfully added' : 'Could not add'} ${
-    //             courseInfo && `${courseInfo.subject} ${courseInfo.number}`
-    //           } to ${semesterToAdd}. ${isDupeCourse ? 'You have taken this course already!' : ''}
-    //               ${!addSuccess ? 'Prerequisites not met!' : ''}`}
-    //         />
   )
 }
 

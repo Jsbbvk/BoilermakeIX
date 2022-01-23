@@ -5,17 +5,12 @@ import {
   Chip,
   styled,
   TextField,
-  FormControl,
-  Input,
-  InputLabel,
-  InputAdornment,
-  IconButton,
   Autocomplete,
   Button,
   Stack,
   Fade,
 } from '@mui/material'
-import { useState, useRef, useCallback, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Planning from '../Planning'
 import { setTracks, addCourse, removeCourse } from '../../../store'
@@ -41,7 +36,7 @@ const StyledButton = styled(Button)({
   borderRadius: 40,
   padding: '18px 28px',
   fontSize: '1.5rem',
-  transition: 'transform 250ms ease',
+  transition: 'transform 250ms ease, background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
 
   '&:hover': {
     backgroundColor: '#dba857f4',
@@ -145,9 +140,12 @@ function Home() {
   return (
     <Container sx={{ py: 7 }}>
       <Box sx={{ textAlign: 'center' }}>
-        <Typography variant="h2">&#127345;️lanner</Typography>
+        <Stack direction="row" justifyContent="center">
+          <img src="/logo.png" width="90px" alt="logo" />
+          <Typography variant="h2">lanner</Typography>
+        </Stack>
         <Box mt={5}>
-          <Typography variant="h6">Select CS Tracks</Typography>
+          <Typography variant="h6">Select CS Tracks 💻</Typography>
           <Box mt={1}>
             {TRACKS.map((track) => (
               <StyledChip
@@ -160,7 +158,7 @@ function Home() {
           </Box>
         </Box>
         <Box mt={6}>
-          <Typography variant="h6">Enter Previous/Current Courses</Typography>
+          <Typography variant="h6">Enter Previous/Current Courses 📚</Typography>
           <Stack alignItems="center">
             <Autocomplete
               disablePortal
@@ -191,7 +189,7 @@ function Home() {
                 <TextField
                   {...params}
                   autoComplete="off"
-                  label="Course Name/Number"
+                  label="Search by course name or number"
                   variant="standard"
                 />
               )}
@@ -223,7 +221,7 @@ function Home() {
           )}
         </Box>
         <Box mt={10}>
-          <StyledButton onClick={onStartPlanning}>Start Planning!</StyledButton>
+          <StyledButton onClick={onStartPlanning}>Start Planning! 📝</StyledButton>
         </Box>
       </Box>
       <Fade in={showPlanning}>

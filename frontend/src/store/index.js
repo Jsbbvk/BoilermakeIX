@@ -11,7 +11,7 @@ export const store = configureStore({
   },
 })
 
-export { addCourse, removeCourse, setCourse } from './reducers/course'
+export { addCourse, removeCourse, setCourse, removeCourses } from './reducers/course'
 export {
   pushSemester,
   insertSemester,
@@ -21,6 +21,7 @@ export {
   addCourseToSemester,
   removeCourseFromSemester,
   setCurrentSemester,
+  removeCourseFromSemesters,
 } from './reducers/semester'
 
 export { addTrack, removeTrack, setTracks } from './reducers/tracks'

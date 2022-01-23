@@ -9,17 +9,11 @@ import {
   AccordionDetails,
   LinearProgress,
   Stack,
-  CircularProgress,
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { connect, useSelector } from 'react-redux'
-import { memo, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import {
-  getPercentageOfCompletion,
-  coursesInList,
-  courseExist,
-  getAllCourses,
-} from '../../../../utilities'
+import { connect } from 'react-redux'
+import { memo, useCallback, useContext, useEffect, useState } from 'react'
+import { getPercentageOfCompletion, getAllCourses } from '../../../../utilities'
 import UserContext from '../../../../userContext'
 
 const StyledChip = styled(Chip)({
@@ -118,7 +112,7 @@ const mapStateToProps = (state) => ({
 
 const PercentageDisplay = connect(mapStateToProps)(
   memo(
-    ({ previousCourses, value, depth, curriculum, courseList }) => {
+    ({ previousCourses, value, curriculum }) => {
       const [percent, setPercent] = useState(0)
 
       const getPercentage = useCallback((v, p) => getPercentageOfCompletion(v, p, 100), [])

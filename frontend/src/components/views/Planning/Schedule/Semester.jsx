@@ -4,177 +4,123 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Container,
   styled,
   Chip,
-  Button,
   IconButton,
+  Grid,
+  Grow,
 } from '@mui/material'
-import { useSelector, useStore, useDispatch } from 'react-redux'
-import AddIcon from '@mui/icons-material/Add'
-import DeleteIcon from '@mui/icons-material/Delete'
-import RemoveIcon from '@mui/icons-material/Close'
+import { useSelector, useDispatch, batch } from 'react-redux'
+import RemoveIcon from '@mui/icons-material/Remove'
 import { useContext, useState } from 'react'
-import EditIcon from '@mui/icons-material/Edit'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import PromptDialog from '../../../common/PromptDialog'
-import { getStartingSemester, getNextSemester } from '../../../../utilities/semester'
-import {
-  pushSemester,
-  popSemester,
-  renameSemester,
-  removeCourseFromSemester,
-} from '../../../../store/reducers/semester'
-import ConfirmDialog from '../../../common/ConfirmDialog'
+import { popSemester, removeCourseFromSemester } from '../../../../store/reducers/semester'
 import UserContext from '../../../../userContext'
 
-const StyledAccordion = styled(Accordion)({
-  backgroundColor: '#dba8574f',
-  marginBottom: 10,
+import { removeCourse, removeCourses } from '../../../../store'
+
+const StyledChip = styled(Chip)({
+  margin: 6,
+  cursor: 'pointer',
+  backgroundColor: '#dba857d6',
+  '&:hover': {
+    backgroundColor: '#dba857f4',
+  },
 })
 
-function Semester({ index, title, courses }) {
+function Semester({ title, courses }) {
   const dispatch = useDispatch()
-  const { lastSemester } = useSelector((state) => state.semester)
+  const [expanded, setExpanded] = useState(true)
+
+  const { lastSemester, semesters } = useSelector((state) => state.semester)
 
   const { setShow, setCourse } = useContext(UserContext)
 
-  const [showRename, setShowRename] = useState(false)
-  const [newRename, setNewRename] = useState('')
-  const [showDelete, setShowDelete] = useState(false)
-
-  const [selectedCourse, setSelectedCourse] = useState(null)
-  const [showDeleteCourse, setShowDeleteCourse] = useState(false)
-
-  const promptRename = () => {
-    setShowRename(true)
-    setNewRename(title)
-  }
-
-  const cancelRename = () => {
-    setShowRename(false)
-  }
-
-  const handleChangeRename = (e) => {
-    setNewRename(e.target.value)
-  }
-
-  const renameSem = () => {
-    dispatch(
-      renameSemester({
-        title,
-        newTitle: newRename,
-      })
-    )
-    setShowRename(false)
-  }
-
-  const promptDelete = () => {
-    setShowDelete(true)
-  }
-
-  const cancelDelete = () => {
-    setShowDelete(false)
-  }
-
   const deleteSem = () => {
-    setShowDelete(false)
-    dispatch(popSemester())
+    const { courses: coursesToRemove } = semesters[lastSemester.index]
+    batch(() => {
+      dispatch(removeCourses({ coursesToRemove }))
+      dispatch(popSemester())
+    })
   }
 
-  const courseClick = (subject, number) => {
+  const courseClick = (course) => {
     setShow(true)
-    setCourse({ subject, number })
+    setCourse(course)
   }
 
-  const promptDeleteCourse = (course) => {
-    setShowDeleteCourse(true)
-    setSelectedCourse(course)
-  }
-
-  const cancelDeleteCourse = () => {
-    setShowDeleteCourse(false)
-  }
-
-  const deleteCourse = () => {
-    dispatch(
-      removeCourseFromSemester({
-        semesterTitle: title,
-        course: selectedCourse,
-      })
-    )
-    setShowDeleteCourse(false)
+  const deleteCourse = (course) => {
+    batch(() => {
+      dispatch(
+        removeCourseFromSemester({
+          semesterTitle: title,
+          course,
+        })
+      )
+      dispatch(removeCourse(course))
+    })
   }
 
   return (
-    <Box>
-      <Accordion defaultExpanded sx={{ backgroundColor: '#dba8574f' }}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          sx={{
-            alignItems: 'center',
-          }}
-        >
-          <Typography variant="h6">{title}</Typography>
-          <IconButton size="small" title="Rename" onClick={promptRename} sx={{ ml: 'auto' }}>
-            <EditIcon />
-          </IconButton>
-          {lastSemester && lastSemester.title === title && (
-            <IconButton size="small" title="Delete semester" onClick={promptDelete}>
-              <DeleteIcon />
-            </IconButton>
-          )}
-        </AccordionSummary>
-        <AccordionDetails sx={{ backgroundColor: 'black' }}>
-          {courses.length === 0 ? (
-            <Typography sx={{ fontStyle: 'italic', padding: 1 }}>No courses</Typography>
-          ) : (
-            courses.map((course, i) => (
-              <Box key={i} sx={{ padding: 1, display: 'flex', alignItems: 'center' }}>
-                <Typography
-                  onClick={() => courseClick(course.subject, course.number)}
-                  sx={{ cursor: 'pointer' }}
-                >
-                  {course.subject} {course.number}
-                </Typography>
-                <IconButton
-                  title="Remove course"
-                  sx={{ ml: 'auto' }}
-                  onClick={() => promptDeleteCourse(course)}
-                >
-                  <RemoveIcon />
-                </IconButton>
-              </Box>
-            ))
-          )}
-        </AccordionDetails>
-      </Accordion>
-      <PromptDialog
-        open={showRename}
-        defaultValue={title}
-        onClose={cancelRename}
-        onChange={handleChangeRename}
-        onSubmit={renameSem}
-        title={`Rename "${title}"`}
-        message="Enter new semester name"
-      />
-      <ConfirmDialog
-        open={showDelete}
-        onClose={cancelDelete}
-        onSubmit={deleteSem}
-        title="Confirm Deletion"
-        message={`Are you sure you want to delete "${title}"?`}
-      />
-      <ConfirmDialog
-        open={showDeleteCourse}
-        onClose={cancelDeleteCourse}
-        onSubmit={deleteCourse}
-        title="Confirm Deletion"
-        message={`Are you sure you want to delete "${selectedCourse && selectedCourse.subject} ${
-          selectedCourse && selectedCourse.number
-        }"?`}
-      />
-    </Box>
+    <Accordion
+      defaultExpanded
+      sx={{ backgroundColor: '#dba8574f' }}
+      expanded={expanded}
+      onChange={() => setExpanded((p) => !p)}
+    >
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        sx={{
+          alignItems: 'center',
+        }}
+      >
+        <Typography variant="h6">{title}</Typography>
+      </AccordionSummary>
+      <AccordionDetails sx={{ backgroundColor: '#292929' }}>
+        {courses.length === 0 ? (
+          <Typography sx={{ padding: 1 }}>No courses</Typography>
+        ) : (
+          <Grid container>
+            {courses.map((course) => (
+              <Grid item xs={6} key={`${course.subject} ${course.number}`}>
+                <StyledChip
+                  label={`${course.subject} ${course.number}`}
+                  onDelete={() => deleteCourse(course)}
+                  onClick={() => courseClick(course)}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        )}
+        {semesters.length > 1 && lastSemester && lastSemester.title === title && (
+          <Box
+            sx={{
+              position: 'absolute',
+              left: '50%',
+              bottom: 0,
+              transform: 'translate(-50%, 50%)',
+            }}
+          >
+            <Grow in={expanded}>
+              <IconButton
+                size="small"
+                title="Delete semester"
+                sx={{
+                  backgroundColor: '#383838',
+                  color: '#e74c3c',
+                  '&:hover': {
+                    backgroundColor: '#404040',
+                  },
+                }}
+                onClick={deleteSem}
+              >
+                <RemoveIcon />
+              </IconButton>
+            </Grow>
+          </Box>
+        )}
+      </AccordionDetails>
+    </Accordion>
   )
 }
 

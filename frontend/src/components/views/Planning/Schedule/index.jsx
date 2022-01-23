@@ -1,25 +1,31 @@
-import {
-  Box,
-  Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Container,
-  styled,
-  Chip,
-  Button,
-  IconButton,
-} from '@mui/material'
-import { useSelector, useStore, useDispatch } from 'react-redux'
+import { Box, Typography, styled, Button, IconButton } from '@mui/material'
+import { useSelector, useDispatch } from 'react-redux'
 import AddIcon from '@mui/icons-material/Add'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import DownloadIcon from '@mui/icons-material/Download'
 import UploadIcon from '@mui/icons-material/Upload'
 import Semester from './Semester'
-import PromptDialog from '../../../common/PromptDialog'
 import { getStartingSemester, getNextSemester } from '../../../../utilities/semester'
 import { pushSemester } from '../../../../store/reducers/semester'
-import { exportCsv, exportJson, importJson } from '../../../../utilities/save'
+import { exportCsv } from '../../../../utilities/save'
+
+const StyledButton = styled(Button)({
+  textTransform: 'none',
+  borderRadius: '24px',
+  padding: '10px 20px',
+  margin: '0 10px',
+  backgroundColor: '#3b3b3b',
+  transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 250ms ease',
+  color: 'white',
+
+  '&:hover': {
+    backgroundColor: '#474747',
+  },
+
+  '&:active': {
+    transform: 'scale(0.96)',
+  },
+})
 
 function Schedule() {
   const dispatch = useDispatch()
@@ -45,47 +51,48 @@ function Schedule() {
   return (
     <Box>
       <Typography variant="h3" sx={{ textAlign: 'center' }}>
-        Schedule
+        Schedule 📅
       </Typography>
-      <Box sx={{ mt: 4, pl: 3, pr: 3 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-          <Button
-            sx={{ margin: 1 }}
+      <Box sx={{ mt: 3, px: 2 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
+          <StyledButton
             variant="contained"
             startIcon={<DownloadIcon />}
             onClick={handleExportClick}
           >
             Export
-          </Button>
-          <Button
-            sx={{ margin: 1 }}
-            variant="contained"
-            startIcon={<UploadIcon />}
-            component="label"
-          >
+          </StyledButton>
+          <StyledButton variant="contained" startIcon={<UploadIcon />} component="label">
             Import
-          </Button>
+          </StyledButton>
         </Box>
-        {semesters.length === 0 ? (
-          <Typography
-            variant="h6"
-            sx={{ mb: 2, fontStyle: 'italic', width: '100%', textAlign: 'center' }}
-          >
-            No semesters yet
-          </Typography>
-        ) : (
-          semesters.map((semester) => <Semester key={semester.index} {...semester} />)
-        )}
-        <Box sx={{ textAlign: 'center' }}>
-          <Button
+        <Box>
+          {semesters.length === 0 ? (
+            <Typography
+              variant="h6"
+              sx={{ mb: 2, fontStyle: 'italic', width: '100%', textAlign: 'center' }}
+            >
+              No semesters yet
+            </Typography>
+          ) : (
+            semesters.map((semester) => <Semester key={semester.index} {...semester} />)
+          )}
+        </Box>
+        <Box sx={{ textAlign: 'center', mt: 5 }}>
+          <IconButton
             variant="text"
             title="Add semester"
-            startIcon={<AddIcon />}
             onClick={addNewSemester}
-            sx={{ mt: 1, pl: 1, pr: 1 }}
+            size="small"
+            sx={{
+              backgroundColor: '#383838',
+              '&:hover': {
+                backgroundColor: '#404040',
+              },
+            }}
           >
-            Add Semester
-          </Button>
+            <AddIcon />
+          </IconButton>
         </Box>
       </Box>
     </Box>

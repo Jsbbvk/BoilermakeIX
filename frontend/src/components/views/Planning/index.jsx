@@ -1,11 +1,9 @@
-/* eslint-disable import/no-cycle */
 import {
   Box,
   Typography,
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Container,
   styled,
   Chip,
   Stack,
@@ -13,8 +11,8 @@ import {
   Grid,
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { useSelector, useDispatch } from 'react-redux'
-import { useCallback, useEffect, useMemo, memo, useContext, createContext, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useCallback, useEffect, useMemo, memo, createContext, useState } from 'react'
 import Course from './Course'
 import UCORE from '../../../constants/ucore'
 import MAJOR from '../../../constants/major'
@@ -22,6 +20,7 @@ import TRACKS_JSON from '../../../constants/tracks'
 import CourseModal from './CourseModal'
 import { coursesInList, getPercentageOfCompletion } from '../../../utilities'
 import Schedule from './Schedule'
+import CourseSearch from './CourseSearch'
 
 const StyledAccordion = styled(Accordion)({
   backgroundColor: '#dba8574f',
@@ -254,7 +253,7 @@ const Planning = memo(() => {
           <Box>
             <Stack alignItems="center" spacing={2}>
               <Typography variant="h3" sx={{ textAlign: 'center' }}>
-                Degree Plan
+                Degree Plan 🎓
               </Typography>
               <Box
                 sx={{
@@ -269,12 +268,14 @@ const Planning = memo(() => {
               >
                 <LinearProgress variant="determinate" value={overallPercent || 0} color="inherit" />
               </Box>
+              <Box mt={3} mb={2}>
+                <CourseSearch />
+              </Box>
             </Stack>
             <Box mt={4}>
               {displayCurriculums(UCORE, 'University Core Curriculum')}
               {displayCurriculums(MAJOR, 'Major Requirements')}
 
-              {/* TODO render in selected tracks */}
               <StyledAccordion>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
