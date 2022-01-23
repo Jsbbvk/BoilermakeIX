@@ -1,6 +1,7 @@
 {
     "title": "General Education",
-    "type": "pick 3",
+    "type": "or",
+    "pick": 3,
     "value": [
         {
             "type": "course",

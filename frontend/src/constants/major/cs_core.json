@@ -1,6 +1,7 @@
 {
     "title": "CS Core",
     "type": "and",
+    "size": "large",
     "value": [
         {
             "type": "course",

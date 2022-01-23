@@ -21,6 +21,15 @@ export const courseExist = ({ type, value }, prevCourses) => {
   }
 }
 
+export const getAllCourses = ({ type, value }) => {
+  if (type === 'and' || type === 'or') {
+    return value.flatMap((obj) => getAllCourses(obj))
+  }
+
+  if (type === 'course') return [value]
+  return null
+}
+
 export const coursesInList = ({ type, value }, list) => {
   if (list.length === 0) return []
   // console.log('courseList')

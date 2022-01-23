@@ -14,7 +14,12 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { connect, useSelector } from 'react-redux'
 import { memo, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { getPercentageOfCompletion, coursesInList, courseExist } from '../../../../utilities'
+import {
+  getPercentageOfCompletion,
+  coursesInList,
+  courseExist,
+  getAllCourses,
+} from '../../../../utilities'
 // eslint-disable-next-line import/no-cycle
 import { DegreeProgressContext } from '..'
 import UserContext from '../../../../userContext'
@@ -28,6 +33,12 @@ const StyledChip = styled(Chip)({
 const HSL_FACTOR = 5
 
 const Course = memo(({ depth = 1, type, pick = 1, value, displayType, title, curriculum }) => {
+  const getCourses = useCallback(() => {
+    if (depth !== 2) return null
+
+    return getAllCourses({ type, value })
+  }, [depth, value, type])
+
   if (depth > 4) {
     return null
   }
@@ -65,6 +76,7 @@ const Course = memo(({ depth = 1, type, pick = 1, value, displayType, title, cur
               value={{ type, value, pick }}
               depth={depth}
               curriculum={curriculum}
+              courseList={getCourses()}
             />
           )}
         </Stack>
@@ -108,14 +120,14 @@ const mapStateToProps = (state) => ({
 
 const PercentageDisplay = connect(mapStateToProps)(
   memo(
-    ({ previousCourses, value, depth, curriculum }) => {
+    ({ previousCourses, value, depth, curriculum, courseList }) => {
       const { setProgress } = useContext(DegreeProgressContext)
       const [percent, setPercent] = useState(0)
+
       const getPercentage = useCallback((v, p) => getPercentageOfCompletion(v, p, 100), [])
-      console.log('rendering')
+
       useEffect(() => {
         const pValue = getPercentage(value, previousCourses)
-        // console.log(curriculum, pValue)
         setPercent(pValue)
         if (depth === 2) {
           setProgress(curriculum, pValue)
@@ -138,7 +150,28 @@ const PercentageDisplay = connect(mapStateToProps)(
       )
     },
     (prev, next) => {
-      // console.log(prev, next)
+      const diff = prev?.previousCourses
+        .filter(
+          (pC) =>
+            !next?.previousCourses.find(
+              (nC) => pC.subject === nC.subject && pC.number === nC.number
+            )
+        )
+        .concat(
+          next?.previousCourses.filter(
+            (pC) =>
+              !prev?.previousCourses.find(
+                (nC) => pC.subject === nC.subject && pC.number === nC.number
+              )
+          )
+        )
+
+      if (!diff || !diff.length) return true
+
+      const res = !diff.some((course) =>
+        next?.courseList.find((c) => c.subject === course.subject && c.number === course.number)
+      )
+      return res
     }
   )
 )

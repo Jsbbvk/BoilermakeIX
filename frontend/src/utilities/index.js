@@ -1,1 +1,7 @@
-export { courseEquals, courseExist, coursesInList, getPercentageOfCompletion } from './course'
+export {
+  courseEquals,
+  courseExist,
+  getAllCourses,
+  coursesInList,
+  getPercentageOfCompletion,
+} from './course'
