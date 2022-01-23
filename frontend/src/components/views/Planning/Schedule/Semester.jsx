@@ -108,7 +108,7 @@ function Semester({ index, title, courses }) {
 
   return (
     <Box>
-      <StyledAccordion>
+      <Accordion defaultExpanded sx={{ backgroundColor: '#dba8574f', mb: 10 }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           sx={{
@@ -148,7 +148,7 @@ function Semester({ index, title, courses }) {
             ))
           )}
         </AccordionDetails>
-      </StyledAccordion>
+      </Accordion>
       <PromptDialog
         open={showRename}
         defaultValue={title}

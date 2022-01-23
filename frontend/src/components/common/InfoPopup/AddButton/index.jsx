@@ -58,7 +58,7 @@ function AddButton() {
           >
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
-                <MenuList id="split-button-menu">
+                <MenuList>
                   {semesters.map(({ index, title }, i) => (
                     <MenuItem
                       key={`${title}-${index}`}

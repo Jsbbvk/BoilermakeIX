@@ -26,15 +26,38 @@ import {
 import { forwardRef, useContext, useEffect, useRef, useState } from 'react'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector, batch } from 'react-redux'
 import { getCourse } from '../../../api'
 import Course from '../../views/Planning/Course'
 import UserContext from '../../../userContext'
 import SelectDialog from '../SelectDialog'
-import { addCourseToSemester } from '../../../store'
+import { addCourse, addCourseToSemester, pushSemester } from '../../../store'
 import AlertDialog from '../AlertDialog'
-import { checkPrereqs, hasTaken, getPercentageOfCompletion } from '../../../utilities'
+import {
+  getStartingSemester,
+  getPercentageOfCompletion,
+  checkPrereqs,
+  hasTaken,
+} from '../../../utilities'
 import AddButton from './AddButton'
+
+// TODO: perhaps move this to a diff place besides common
+
+const style = {
+  position: 'absolute',
+  top: '40%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  // width: 400,
+  bgcolor: 'background.paper',
+  // border: '2px solid #000',
+  boxShadow: 24,
+  outline: 'none',
+  p: 4,
+  borderRadius: 5,
+  maxHeight: 400,
+  overflowY: 'auto',
+}
 
 const StyledAccordion = styled(Accordion)({
   backgroundColor: '#dba8574f',
@@ -109,6 +132,10 @@ function InfoPopup() {
   }, [info, previousCourses])
 
   const promptAdd = () => {
+    if (semesters.length === 0) {
+      dispatch(pushSemester(getStartingSemester()))
+      setSemesterToAdd(lastSemester ? lastSemester.title : '')
+    }
     setShowAdd(true)
     setSemesterToAdd(lastSemester ? lastSemester.title : '')
   }
@@ -127,25 +154,20 @@ function InfoPopup() {
     const dupe = hasTaken(courseInfo, previousCourses)
     setDupeCourse(dupe)
     if (!dupe && checkPrereqs(info, previousCourses, chosenSemester)) {
-      dispatch(
-        addCourseToSemester({
-          semesterTitle: semesterToAdd,
-          course: courseInfo,
-        })
-      )
+      batch(() => {
+        dispatch(
+          addCourseToSemester({
+            semesterTitle: semesterToAdd,
+            course: courseInfo,
+          })
+        )
+        dispatch(addCourse(courseInfo))
+      })
       setAddSuccess(true)
     } else {
       setAddSuccess(false)
     }
     setShowStatus(true)
-    // dispatch(
-    //   addCourseToSemester({
-    //     semester: semesterToAdd,
-    //     course: courseInfo,
-    //   })
-    // )
-    // setAddSuccess(true)
-    // setShowStatus(true)
   }
 
   return (
@@ -233,26 +255,6 @@ function InfoPopup() {
       </Box>
     </Dialog>
 
-    //         <Box sx={{ mt: 2, textAlign: 'center' }}>
-    //           <Button
-    //             variant="contained"
-    //             startIcon={<AddIcon />}
-    //             // disabled={!addable}
-    //             title="Add to your semester schedule"
-    //             onClick={promptAdd}
-    //           >
-    //             Add to Schedule
-    //           </Button>
-    //           <Button
-    //             sx={{ ml: 1 }}
-    //             variant="contained"
-    //             startIcon={<LinkIcon />}
-    //             title="View webpage"
-    //             onClick={() => window.open(info.url)}
-    //           >
-    //             View webpage
-    //           </Button>
-    //         </Box>
     //         <SelectDialog
     //           open={showAddDialog}
     //           onClose={cancelAdd}
@@ -274,11 +276,6 @@ function InfoPopup() {
     //           } to ${semesterToAdd}. ${isDupeCourse ? 'You have taken this course already!' : ''}
     //               ${!addSuccess ? 'Prerequisites not met!' : ''}`}
     //         />
-    //         {/* TODO: auto generate semester? */}
-    //       </>
-    //     )}
-    //   </Box>
-    // </Modal>
   )
 }
 
