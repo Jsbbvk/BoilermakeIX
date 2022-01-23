@@ -51,6 +51,7 @@ function Schedule() {
 
   const importCsv = async () => {
     const input = document.getElementById('importFileUpload')
+    if (input.files.length === 0) return
     let data = await input.files[0].text()
     const pc = data.substring(0, data.indexOf('\n')).split(',')
     const realPc = []
