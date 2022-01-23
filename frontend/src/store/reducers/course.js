@@ -5,7 +5,7 @@ const initialState = {
 }
 
 export const courseSlice = createSlice({
-  name: 'courses',
+  name: 'course',
   initialState,
   reducers: {
     addCourse: (state, action) => {

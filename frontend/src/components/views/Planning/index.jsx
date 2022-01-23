@@ -10,6 +10,7 @@ import {
   Chip,
   Stack,
   LinearProgress,
+  Grid,
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useSelector, useDispatch } from 'react-redux'
@@ -20,6 +21,7 @@ import MAJOR from '../../../constants/major'
 import TRACKS from '../../../constants/tracks'
 import CourseModal from './CourseModal'
 import { coursesInList } from '../../../utilities'
+import Schedule from './Schedule'
 
 const StyledAccordion = styled(Accordion)({
   backgroundColor: '#dba8574f',
@@ -150,70 +152,76 @@ const Planning = memo(() => {
 
   return (
     <DegreeProgressContext.Provider value={degreeProgress}>
-      <Box>
-        <Typography variant="h3" sx={{ textAlign: 'center' }}>
-          Degree Plan
-        </Typography>
-        <Box mt={4}>
-          {/* TODO add help section explaining logic */}
-          {displayCurriculums(UCORE, 'University Core Curriculum')}
-          {displayCurriculums(MAJOR, 'Major Requirements')}
+      <Grid container spacing={1}>
+        <Grid item xs={8}>
+          <Box>
+            <Typography variant="h3" sx={{ textAlign: 'center' }}>
+              Degree Plan
+            </Typography>
+            <Box mt={4}>
+              {displayCurriculums(UCORE, 'University Core Curriculum')}
+              {displayCurriculums(MAJOR, 'Major Requirements')}
 
-          <StyledAccordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              sx={{
-                alignItems: 'center',
-              }}
-            >
-              <Typography variant="h6">Track Requirements</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              {Object.values(TRACKS).map((curriculum) => (
-                <Accordion key={curriculum.title}>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    sx={{
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Box>
-                      <Stack direction="row" alignItems="center" spacing={2}>
-                        <Typography variant="h6">{curriculum.title}</Typography>
-                        <Box
-                          sx={{
-                            width: '75px',
-                            color: () => {
-                              const percent = Math.round(
-                                curriculumProgress[curriculum.title] / curriculum.value.length
-                              )
-                              if (percent < 50) return '#d32f2f'
-                              if (percent < 100) return '#fbc02d'
-                              return '#66bb6a'
-                            },
-                          }}
-                        >
-                          <LinearProgress
-                            variant="determinate"
-                            value={Math.round(
-                              curriculumProgress[curriculum.title] / curriculum.value.length
-                            )}
-                            color="inherit"
-                          />
+              <StyledAccordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  sx={{
+                    alignItems: 'center',
+                  }}
+                >
+                  <Typography variant="h6">Track Requirements</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  {Object.values(TRACKS).map((curriculum) => (
+                    <Accordion key={curriculum.title}>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        sx={{
+                          alignItems: 'center',
+                        }}
+                      >
+                        <Box>
+                          <Stack direction="row" alignItems="center" spacing={2}>
+                            <Typography variant="h6">{curriculum.title}</Typography>
+                            <Box
+                              sx={{
+                                width: '75px',
+                                color: () => {
+                                  const percent = Math.round(
+                                    curriculumProgress[curriculum.title] / curriculum.value.length
+                                  )
+                                  if (percent < 50) return '#d32f2f'
+                                  if (percent < 100) return '#fbc02d'
+                                  return '#66bb6a'
+                                },
+                              }}
+                            >
+                              <LinearProgress
+                                variant="determinate"
+                                value={Math.round(
+                                  curriculumProgress[curriculum.title] / curriculum.value.length
+                                )}
+                                color="inherit"
+                              />
+                            </Box>
+                          </Stack>
+                          <Box>{getBadges(curriculum, previousCourses)}</Box>
                         </Box>
-                      </Stack>
-                      <Box>{getBadges(curriculum, previousCourses)}</Box>
-                    </Box>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Course {...curriculum} />
-                  </AccordionDetails>
-                </Accordion>
-              ))}
-            </AccordionDetails>
-          </StyledAccordion>
-        </Box>
-      </Box>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <Course {...curriculum} />
+                      </AccordionDetails>
+                    </Accordion>
+                  ))}
+                </AccordionDetails>
+              </StyledAccordion>
+            </Box>
+          </Box>
+        </Grid>
+        <Grid item xs={4}>
+          <Schedule />
+        </Grid>
+      </Grid>
     </DegreeProgressContext.Provider>
   )
 })

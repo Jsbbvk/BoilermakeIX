@@ -1,12 +1,10 @@
 {
     "title": "Cultural Diversity (Language & Culture)",
-    "size": "large",
     "type": "or",
     "value": [
         {
             "title": "3 Language",
-            "type": "or",
-            "pick": 3,
+            "type": "pick 3",
             "value": [
                 {
                     "type": "course",
@@ -393,8 +391,7 @@
             "type": "and",
             "value": [
                 {
-                    "type": "or",
-                    "pick": 2,
+                    "type": "pick 2",
                     "value": [
                         {
                             "type": "course",
@@ -7409,8 +7406,7 @@
         },
         {
             "title": "3 Culture",
-            "type": "or",
-            "pick": 3,
+            "type": "pick 3",
             "value": [
                 {
                     "type": "course",

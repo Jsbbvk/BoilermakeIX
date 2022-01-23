@@ -118,16 +118,16 @@ labsci = {
             "title": "Physics Sequence 4",
             "type": "and",
             "value": parse_courses([
-                "PHYS 22000 - General Physics"
-                "PHYS 22100 - General Physics "
+                "PHYS 22000 - General Physics",
+                "PHYS 22100 - General Physics ",
             ])
         },
         {
             "title": "Physics Sequence 5",
             "type": "and",
             "value": parse_courses([
-                "PHYS 23300 - Physics For Life Sciences I"
-                "PHYS 23400 - Physics For Life Sciences II "
+                "PHYS 23300 - Physics For Life Sciences I",
+                "PHYS 23400 - Physics For Life Sciences II ",
             ])
         },
     ]

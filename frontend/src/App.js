@@ -5,6 +5,8 @@ import { Provider } from 'react-redux'
 import { getCourse } from './api/course'
 import Home from './components/views/Home'
 import { store } from './store'
+import InfoPopup from './components/common/InfoPopup'
+import UserProvider from './components/Provider'
 
 const theme = createTheme({
   typography: {
@@ -24,12 +26,13 @@ const theme = createTheme({
 
 function App() {
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <UserProvider>
         <Home />
-      </ThemeProvider>
-    </Provider>
+        <InfoPopup />
+      </UserProvider>
+    </ThemeProvider>
   )
 }
 

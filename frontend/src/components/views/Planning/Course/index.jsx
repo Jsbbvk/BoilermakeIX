@@ -12,11 +12,12 @@ import {
   CircularProgress,
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { memo, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { getPercentageOfCompletion, coursesInList } from '../../../../utilities'
+import { getPercentageOfCompletion, coursesInList, courseExist } from '../../../../utilities'
 // eslint-disable-next-line import/no-cycle
 import { DegreeProgressContext } from '..'
+import UserContext from '../../../../userContext'
 
 const StyledChip = styled(Chip)({
   margin: 6,
@@ -27,6 +28,8 @@ const StyledChip = styled(Chip)({
 const HSL_FACTOR = 5
 
 const Course = memo(({ depth = 1, type, pick = 1, value, displayType, title, curriculum }) => {
+  const { previousCourses } = useSelector((state) => state.course)
+
   if (depth > 4) {
     return null
   }
@@ -145,6 +148,13 @@ const PercentageDisplay = connect(mapStateToProps)(
 const CourseChip = connect(mapStateToProps)(
   memo(
     ({ val, d, previousCourses }) => {
+      const { setShow, setCourse } = useContext(UserContext)
+
+      const handleClick = (subject, number) => {
+        setShow(true)
+        setCourse({ subject, number })
+      }
+
       const findCourse = ({ subject, number }) =>
         previousCourses?.some(
           ({ subject: _subject, number: _number }) => subject === _subject && number === _number
@@ -152,7 +162,8 @@ const CourseChip = connect(mapStateToProps)(
 
       return (
         <StyledChip
-          label={`${val.subject} ${val.number}: ${val.title}`}
+          label={`${val.subject} ${val.number}${val.title ? `: ${val.title}` : ''}`}
+          onClickCapture={() => handleClick(val.subject, val.number)}
           sx={{
             backgroundColor: findCourse(val)
               ? '#2e7d32'

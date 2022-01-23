@@ -5,7 +5,7 @@ const initialState = {
 }
 
 export const tracksSlice = createSlice({
-  name: 'tracks',
+  name: 'track',
   initialState,
   reducers: {
     addTrack: (state, action) => {
@@ -20,6 +20,6 @@ export const tracksSlice = createSlice({
   },
 })
 
-export const { addTrack } = tracksSlice.actions
+export const { addTrack, removeTrack } = tracksSlice.actions
 
 export default tracksSlice.reducer
