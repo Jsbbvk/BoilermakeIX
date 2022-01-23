@@ -68,6 +68,7 @@ export const semestersSlice = createSlice({
         (course) => !courseEquals(course, action.payload.course)
       )
     },
+<<<<<<< HEAD
     removeCourseFromSemesters: (state, action) => {
       const idx = state.semesters.findIndex((sem) =>
         sem.courses.find((c) => courseEquals(c, action.payload))
@@ -75,6 +76,10 @@ export const semestersSlice = createSlice({
       state.semesters[idx].courses = state.semesters[idx].courses.filter(
         (c) => !courseEquals(c, action.payload)
       )
+=======
+    setSemesters: (state, action) => {
+      state.semesters = action.payload
+>>>>>>> 132d01c7364c7987cd267e240e786246405c0f24
     },
   },
 })
@@ -88,7 +93,11 @@ export const {
   addCourseToSemester,
   removeCourseFromSemester,
   setCurrentSemester,
+<<<<<<< HEAD
   removeCourseFromSemesters,
+=======
+  setSemesters,
+>>>>>>> 132d01c7364c7987cd267e240e786246405c0f24
 } = semestersSlice.actions
 
 export default semestersSlice.reducer

@@ -1,5 +1,21 @@
+<<<<<<< HEAD
 import { Box, Typography, styled, Button, IconButton } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
+=======
+import {
+  Box,
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Container,
+  styled,
+  Chip,
+  Button,
+  IconButton,
+} from '@mui/material'
+import { useSelector, useStore, useDispatch, batch } from 'react-redux'
+>>>>>>> 132d01c7364c7987cd267e240e786246405c0f24
 import AddIcon from '@mui/icons-material/Add'
 import { useEffect } from 'react'
 import DownloadIcon from '@mui/icons-material/Download'
@@ -8,6 +24,7 @@ import Semester from './Semester'
 import { getStartingSemester, getNextSemester } from '../../../../utilities/semester'
 import { pushSemester } from '../../../../store/reducers/semester'
 import { exportCsv } from '../../../../utilities/save'
+<<<<<<< HEAD
 
 const StyledButton = styled(Button)({
   textTransform: 'none',
@@ -26,6 +43,9 @@ const StyledButton = styled(Button)({
     transform: 'scale(0.96)',
   },
 })
+=======
+import { setCourse, setTracks, setSemesters } from '../../../../store'
+>>>>>>> 132d01c7364c7987cd267e240e786246405c0f24
 
 function Schedule() {
   const dispatch = useDispatch()
@@ -48,6 +68,51 @@ function Schedule() {
     exportCsv(previousCourses, semesters, tracks)
   }
 
+  const importCsv = async () => {
+    const input = document.getElementById('importFileUpload')
+    let data = await input.files[0].text()
+    const pc = data.substring(0, data.indexOf('\n')).split(',')
+    const realPc = []
+    let i = 1
+    while (i < pc.length - 1) {
+      realPc.push({
+        subject: pc[i],
+        number: pc[i + 1],
+      })
+      i += 2
+    }
+    data = data.substring(data.indexOf('\n') + 1)
+    let arr = data.substring(0, data.indexOf('\n')).split(',')
+    const realSem = []
+    let index = 0
+    while (arr[0] !== 'tracksSelected') {
+      i = 1
+      const sem = {
+        index,
+        title: arr[0],
+        courses: [],
+      }
+      index += 1
+      while (i < arr.length - 1) {
+        sem.courses.push({
+          subject: arr[i],
+          number: arr[i + 1],
+        })
+        i += 2
+      }
+      realSem.push(sem)
+      data = data.substring(data.indexOf('\n') + 1)
+      arr = data.substring(0, data.indexOf('\n')).split(',')
+    }
+    let realTracks = arr.slice(1)
+    if (realTracks[0] === '') realTracks = []
+    batch(() => {
+      dispatch(setCourse(realPc))
+      dispatch(setSemesters(realSem))
+      dispatch(setTracks(realTracks))
+    })
+  }
+
   return (
     <Box>
       <Typography variant="h3" sx={{ textAlign: 'center' }}>
@@ -64,7 +129,12 @@ function Schedule() {
           </StyledButton>
           <StyledButton variant="contained" startIcon={<UploadIcon />} component="label">
             Import
+<<<<<<< HEAD
           </StyledButton>
+=======
+            <input id="importFileUpload" type="file" hidden onChange={importCsv} />
+          </Button>
+>>>>>>> 132d01c7364c7987cd267e240e786246405c0f24
         </Box>
         <Box>
           {semesters.length === 0 ? (

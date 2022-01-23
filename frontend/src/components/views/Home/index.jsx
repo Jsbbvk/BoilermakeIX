@@ -135,7 +135,8 @@ function Home() {
     if (showPlanning) doScrolling(degreeRef.current.getBoundingClientRect().top, 400)
   }, [showPlanning])
 
-  const buildCourse = ({ subject, number, title }) => `${subject} ${number}: ${title}`
+  const buildCourse = ({ subject, number, title }) =>
+    `${subject} ${number} ${title ? `: ${title}` : ''}`
 
   return (
     <Container sx={{ py: 7 }}>
