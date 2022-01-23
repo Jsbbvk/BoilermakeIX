@@ -111,7 +111,7 @@ function Schedule() {
           </StyledButton>
           <StyledButton variant="contained" startIcon={<UploadIcon />} component="label">
             Import
-            <input id="importFileUpload" type="file" hidden onChange={importCsv} />{' '}
+            <input id="importFileUpload" type="file" hidden onChange={importCsv} accept=".csv" />
           </StyledButton>
         </Box>
         <Box>

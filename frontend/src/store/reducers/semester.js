@@ -78,6 +78,9 @@ export const semestersSlice = createSlice({
     },
     setSemesters: (state, action) => {
       state.semesters = action.payload
+      state.lastSemester =
+        state.semesters.length === 0 ? null : state.semesters[state.semesters.length - 1]
+      state.currentSemester = state.lastSemester
     },
   },
 })
