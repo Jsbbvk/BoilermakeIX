@@ -67,7 +67,7 @@ const TRACKS = [
 const COURSE_NAMES = COURSES.map((course) => `${course.course_id}: ${course.title}`)
 
 function Home() {
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   const [selectedTracks, setSelectedTracks] = useState([])
   const [selectedCourses, setSelectedCourses] = useState([])
@@ -87,22 +87,22 @@ function Home() {
     setCourseInputValue('')
     setCourseValue(null)
     setSelectedCourses((p) => [...p, course])
-    // dispatch(
-    //   addCourse({
-    //     subject: course.split(' ')[0],
-    //     number: parseInt(course.split(' ')[1].slice(0, -1)),
-    //   })
-    // )
+    dispatch(
+      addCourse({
+        subject: course.split(' ')[0],
+        number: parseInt(course.split(' ')[1].slice(0, -1)),
+      })
+    )
   }
 
   const onCourseDelete = (course) => {
     setSelectedCourses((p) => p.filter((c) => c !== course))
-    // dispatch(
-    //   removeCourse({
-    //     subject: course.split(' ')[0],
-    //     number: parseInt(course.split(' ')[1].slice(0, -1)),
-    //   })
-    // )
+    dispatch(
+      removeCourse({
+        subject: course.split(' ')[0],
+        number: parseInt(course.split(' ')[1].slice(0, -1)),
+      })
+    )
   }
 
   const onStartPlanning = () => {
@@ -164,7 +164,6 @@ function Home() {
           </Stack>
           {Boolean(selectedCourses?.length) && (
             <Box mt={3}>
-              {/* TODO cool transition */}
               {selectedCourses.map((course) => (
                 <StyledChip
                   key={course}

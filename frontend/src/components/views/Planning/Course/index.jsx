@@ -28,8 +28,6 @@ const StyledChip = styled(Chip)({
 const HSL_FACTOR = 5
 
 const Course = memo(({ depth = 1, type, pick = 1, value, displayType, title, curriculum }) => {
-  const { previousCourses } = useSelector((state) => state.course)
-
   if (depth > 4) {
     return null
   }
@@ -114,10 +112,10 @@ const PercentageDisplay = connect(mapStateToProps)(
       const { setProgress } = useContext(DegreeProgressContext)
       const [percent, setPercent] = useState(0)
       const getPercentage = useCallback((v, p) => getPercentageOfCompletion(v, p, 100), [])
-
+      console.log('rendering')
       useEffect(() => {
         const pValue = getPercentage(value, previousCourses)
-        console.log(curriculum, pValue)
+        // console.log(curriculum, pValue)
         setPercent(pValue)
         if (depth === 2) {
           setProgress(curriculum, pValue)

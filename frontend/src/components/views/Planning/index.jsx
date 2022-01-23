@@ -162,6 +162,7 @@ const Planning = memo(() => {
               {displayCurriculums(UCORE, 'University Core Curriculum')}
               {displayCurriculums(MAJOR, 'Major Requirements')}
 
+              {/* TODO render in selected tracks */}
               <StyledAccordion>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
