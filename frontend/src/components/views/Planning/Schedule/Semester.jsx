@@ -57,7 +57,7 @@ function Semester({ title, courses }) {
           course,
         })
       )
-      dispatch(removeCourse(course))
+      dispatch(removeCourse({ course }))
     })
   }
 

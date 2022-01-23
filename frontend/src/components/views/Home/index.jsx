@@ -88,21 +88,27 @@ function Home() {
 
     setCourseInputValue('')
     setCourseValue(null)
+    const courseObj = {
+      number: parseInt(course.split(' ')[1].slice(0, -1)),
+      subject: course.split(' ')[0],
+      title: course.substring(course.indexOf(':') + 2),
+    }
     dispatch(
       addCourse({
-        subject: course.split(' ')[0],
-        number: parseInt(course.split(' ')[1].slice(0, -1)),
-        title: course.substring(course.indexOf(':') + 2),
+        course: courseObj,
       })
     )
   }
 
   const onCourseDelete = (course) => {
+    const courseObj = {
+      number: parseInt(course.split(' ')[1].slice(0, -1)),
+      subject: course.split(' ')[0],
+      title: course.substring(course.indexOf(':') + 2),
+    }
     dispatch(
       removeCourse({
-        subject: course.split(' ')[0],
-        number: parseInt(course.split(' ')[1].slice(0, -1)),
-        title: course.substring(course.indexOf(':')),
+        course: courseObj,
       })
     )
   }
@@ -136,7 +142,7 @@ function Home() {
   }, [showPlanning])
 
   const buildCourse = ({ subject, number, title }) =>
-    `${subject} ${number} ${title ? `: ${title}` : ''}`
+    `${subject} ${number}${title ? `: ${title}` : ''}`
 
   return (
     <Container sx={{ py: 7 }}>

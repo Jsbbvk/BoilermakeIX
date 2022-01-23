@@ -9,21 +9,19 @@ export const courseSlice = createSlice({
   initialState,
   reducers: {
     addCourse: (state, action) => {
+      const { course } = action.payload
       if (
-        state.previousCourses.find(
-          (c) => c?.subject === action.payload?.subject && c?.number === action.payload?.number
+        !state.previousCourses.find(
+          (c) => c?.subject === course.subject && c?.number === course.number
         )
       )
-        return
-
-      state.previousCourses.push(action.payload)
+        state.previousCourses.push(course)
     },
     removeCourse: (state, action) => {
-      const {
-        payload: { subject, number },
-      } = action
+      const { course } = action.payload
       state.previousCourses = state.previousCourses.filter(
-        ({ subject: _subject, number: _number }) => !(subject === _subject && number === _number)
+        ({ subject: _subject, number: _number }) =>
+          !(course.subject === _subject && course.number === _number)
       )
     },
     removeCourses: (state, action) => {
@@ -33,7 +31,7 @@ export const courseSlice = createSlice({
       )
     },
     setCourse: (state, action) => {
-      state.previousCourses = action.payload
+      state.previousCourses = action.payload.courses
     },
   },
 })
