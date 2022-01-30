@@ -182,7 +182,8 @@ const CourseChip = connect(mapStateToProps)(
 
       const findCourse = ({ subject, number }) =>
         previousCourses?.some(
-          ({ subject: _subject, number: _number }) => subject === _subject && number === _number
+          ({ subject: _subject, number: _number }) =>
+            subject === _subject && number.toString() === _number.toString()
         )
 
       return (
